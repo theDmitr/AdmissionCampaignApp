@@ -1,0 +1,48 @@
+﻿<Page x:Class="AdmissionCampaign.Views.Pages.University.UniversityPersonalPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdmissionCampaign.Views.Pages.University"
+      xmlns:vm="clr-namespace:AdmissionCampaign.ViewModels.UniversityViewModels"
+      mc:Ignorable="d"
+      MinWidth="600" MinHeight="500">
+
+    <Page.DataContext>
+        <vm:UniversityPersonalViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Личный кабинет учебного заведения" Margin="15,15,0,0" />
+        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,20,0">
+                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Добавить специальность" 
+                                Command="{Binding AddSpeciality}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Объявить приемную кампанию" 
+                                Command="{Binding AnnounceAdmissionCampaigh}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                </StackPanel>
+
+                <StackPanel Margin="20,0,0,0">
+                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список специальностей" 
+                                Command="{Binding MoveToSpecialities}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список приемных кампаний" 
+                                Command="{Binding MoveToAdmissionCampaighs}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Списки абитурентов" 
+                Command="{Binding MoveToEnrolles}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" Width="225"/>
+
+            <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Background="{StaticResource ButtonBackground2Color}" Content="Выйти" 
+                Command="{Binding Quit}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" Width="225"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -1,0 +1,28 @@
+﻿<Page x:Class="AdmissionCampaign.Views.Pages.ChooseLoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdmissionCampaign.Views.Pages"
+      xmlns:vm="clr-namespace:AdmissionCampaign.ViewModels"
+      mc:Ignorable="d"
+      MinWidth="600" MinHeight="500">
+
+    <Page.DataContext>
+        <vm:ChooseLoginViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Главная" Margin="15,15,0,0" />
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Регистрация" 
+                Command="{Binding MoveToEnrolleRegister}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+
+            <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Авторизация" 
+                Command="{Binding MoveToAuth}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+        </StackPanel>
+    </Grid>
+</Page>

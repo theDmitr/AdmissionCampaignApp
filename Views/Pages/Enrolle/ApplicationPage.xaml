@@ -1,0 +1,59 @@
+﻿<Page x:Class="AdmissionCampaign.Views.Pages.Enrolle.ApplicationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdmissionCampaign.Views.Pages.Enrolle"
+      xmlns:vm="clr-namespace:AdmissionCampaign.ViewModels.EnrolleViewModels"
+      mc:Ignorable="d" 
+      MinWidth="600" MinHeight="500">
+
+    <Page.DataContext>
+        <vm:ApplicationViewModel/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <DataTemplate x:Key="Tab">
+            <Border>
+                
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Подача заявления" Margin="15,15,0,0" />
+        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Orientation="Vertical">
+
+            <TabControl>
+                <TabItem Header="ВУЗ 1">
+                    
+                </TabItem>
+                <TabItem Header="ВУЗ 2">
+
+                </TabItem>
+                <TabItem Header="ВУЗ 3">
+
+                </TabItem>
+                <TabItem Header="ВУЗ 4">
+
+                </TabItem>
+                <TabItem Header="ВУЗ 5">
+
+                </TabItem>
+            </TabControl>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="DarkGray"
+                            Command="{Binding MoveToEnrollePersonal}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Сохранить"
+                            Command="{Binding Save}"/>
+            </StackPanel>
+
+            <TextBlock Margin="0,20,0,0" Text="{Binding ErrorMessage}" Style="{StaticResource ErrorTextBlockStyle}" />
+
+        </StackPanel>
+    </Grid>
+</Page>
