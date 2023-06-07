@@ -18,26 +18,20 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="0,0,20,0">
-                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Добавить специальность" 
-                                Command="{Binding AddSpeciality}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
-                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Объявить приемную кампанию" 
+                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Объявить приемную кампанию" 
                                 Command="{Binding AnnounceAdmissionCampaigh}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
                 </StackPanel>
 
                 <StackPanel Margin="20,0,0,0">
-                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список специальностей" 
-                                Command="{Binding MoveToSpecialities}"
-                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
-                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список приемных кампаний" 
+                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список приемных кампаний" 
                                 Command="{Binding MoveToAdmissionCampaighs}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
                 </StackPanel>
             </StackPanel>
 
             <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Списки абитурентов" 
-                Command="{Binding MoveToEnrolles}"
+                Command="{Binding MoveToEnrollesList}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" Width="225"/>
 
             <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Background="{StaticResource ButtonBackground2Color}" Content="Выйти" 

@@ -17,8 +17,10 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
             Passport = enrolle.Passport;
         }
 
-        #region BindingFields
         private readonly Enrolle enrolle;
+
+        #region BindingFields
+
         private string surname;
         private string name;
         private string patronymic;
@@ -33,8 +35,8 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
         #endregion
 
         #region Commands
-        public static NavigationCommand MoveToEnrollePersonal { get => new(PageUriProvider.EnrollePersonal); }
-        public PageCallbackCommand Save { get => new(SaveCallback); }
+        public static NavigationCommand MoveToEnrollePersonal => new(PageUriProvider.EnrollePersonal);
+        public PageCallbackCommand Save => new(SaveCallback);
         #endregion
 
         private void SaveCallback(Page page)
@@ -74,7 +76,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
             enrolle.Lastname = Patronymic;
             enrolle.Passport = Passport;
 
-            dataContext.SaveChanges();
+            _ = dataContext.SaveChanges();
 
             NavigateToPage(page, PageUriProvider.EnrollePersonal);
         }

@@ -5,15 +5,11 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
 {
     public class UniversityPersonalViewModel : ViewModel
     {
-        public UniversityPersonalViewModel() { }
-
         #region Commands
-        public NavigationCommand AddSpeciality { get => new(PageUriProvider.AdminAddSpeciality); }
-        /*AnnounceAdmissionCampaighCommand
-        MoveToSpecialitiesPageCommand
-        MoveToAdmissionCampaighsPageCommand
-        MoveToEnrollesPageCommand
-        QuitCommand*/
+        public static NavigationCommand AnnounceAdmissionCampaigh => new(PageUriProvider.UniversityAnnounceAdmissionCampaigh);
+        public static NavigationCommand MoveToAdmissionCampaighs => new(PageUriProvider.UniversityAdmissionCampaighsList);
+        public static NavigationCommand MoveToEnrollesList => new(PageUriProvider.UniversityEnrollesList);
+        public PageCallbackCommand Quit => new(QuitCallback);
         #endregion
     }
 }

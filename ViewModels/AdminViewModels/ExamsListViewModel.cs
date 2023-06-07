@@ -7,12 +7,12 @@ using System.Windows.Controls;
 
 namespace AdmissionCampaign.ViewModels.AdminViewModels
 {
-    public class UniversitiesListViewModel : ViewModel
+    public class ExamsListViewModel : ViewModel
     {
         #region BindingFields
-        private University selectedItem;
-        public ObservableCollection<University> Universities => new(dataContext.Universities.ToArray());
-        public University SelectedItem { get => selectedItem; set => Set(ref selectedItem, value); }
+        private Exam selectedItem;
+        public ObservableCollection<Exam> Exams => new(dataContext.Exams.ToArray());
+        public Exam SelectedItem { get => selectedItem; set => Set(ref selectedItem, value); }
         #endregion
 
         #region Commands
@@ -27,8 +27,8 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            UniversityEditViewModel.UniversityID = SelectedItem.ID;
-            NavigateToPage(page, PageUriProvider.AdminUniversityEdit);
+            ExamEditViewModel.ExamID = SelectedItem.ID;
+            NavigateToPage(page, PageUriProvider.AdminExamEdit);
         }
     }
 }

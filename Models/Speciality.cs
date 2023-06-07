@@ -15,8 +15,14 @@ namespace AdmissionCampaign.Models
         [Required]
         public string Code { get; set; }
 
-        [NotMapped]
-        public string[] Subjects { get; set; } = new string[3];
+        [Required]
+        public int Exam1ID { get; set; }
+
+        [Required]
+        public int Exam2ID { get; set; }
+
+        [Required]
+        public int Exam3ID { get; set; }
 
         public Speciality(string name, string code)
         {

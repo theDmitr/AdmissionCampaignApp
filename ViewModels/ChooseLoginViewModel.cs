@@ -8,8 +8,8 @@ namespace AdmissionCampaign.ViewModels
         public ChooseLoginViewModel() { }
 
         #region Commands
-        public static NavigationCommand MoveToEnrolleRegister { get => new(PageUriProvider.EnrolleRegister); }
-        public static NavigationCommand MoveToAuth { get => new(PageUriProvider.AuthPage); }
+        public static NavigationCommand MoveToEnrolleRegister => new(PageUriProvider.EnrolleRegister);
+        public static NavigationCommand MoveToAuth => new(PageUriProvider.AuthPage);
         #endregion
     }
 }

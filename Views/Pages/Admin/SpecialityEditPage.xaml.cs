@@ -3,11 +3,11 @@
 namespace AdmissionCampaign.Views.Pages.Admin
 {
     /// <summary>
-    /// Логика взаимодействия для AddSpecialityPage.xaml
+    /// Логика взаимодействия для SpecialityEditPage.xaml
     /// </summary>
-    public partial class AddSpecialityPage : Page
+    public partial class SpecialityEditPage : Page
     {
-        public AddSpecialityPage()
+        public SpecialityEditPage()
         {
             InitializeComponent();
         }

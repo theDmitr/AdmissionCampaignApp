@@ -1,0 +1,37 @@
+﻿<Page x:Class="AdmissionCampaign.Views.Pages.University.EnrollesListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AdmissionCampaign.Views.Pages.University"
+      xmlns:vm="clr-namespace:AdmissionCampaign.ViewModels.UniversityViewModels"
+      mc:Ignorable="d" 
+      MinWidth="600" MinHeight="500">
+
+    <Page.DataContext>
+        <vm:EnrollesListViewModel/>
+    </Page.DataContext>
+
+    <Grid>
+        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Список абитурентов" Margin="15,15,0,0" />
+
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <DataGrid Width="550" Height="280" ItemsSource="{Binding Enrolles}"
+                      Style="{StaticResource TableStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="UserID" Binding="{Binding UserID}"/>
+                    <DataGridTextColumn Width="*" Header="Фамилия" Binding="{Binding Surname}"/>
+                    <DataGridTextColumn Width="*" Header="Имя" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="*" Header="Отчество" Binding="{Binding Lastname}"/>
+                    <DataGridTextColumn Width="*" Header="Паспорт" Binding="{Binding Passport}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="{StaticResource ButtonBackground2Color}"
+                            Command="{Binding MoveToUniversityPersonal}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -5,10 +5,8 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
 {
     public class ApplicationViewModel : ViewModel
     {
-        public ApplicationViewModel() { }
-
         #region Commands
-        public static NavigationCommand MoveToEnrollePersonal { get => new(PageUriProvider.EnrollePersonal); }
+        public static NavigationCommand MoveToEnrollePersonal => new(PageUriProvider.EnrollePersonal);
         #endregion
     }
 }

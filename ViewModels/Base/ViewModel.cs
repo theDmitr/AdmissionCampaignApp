@@ -32,7 +32,9 @@ namespace AdmissionCampaign.ViewModels.Base
         public static void NavigateToPage(Page page, Uri uri)
         {
             if (page != null && uri != null)
-                NavigationService.GetNavigationService(page).Navigate(uri);
+            {
+                _ = NavigationService.GetNavigationService(page).Navigate(uri);
+            }
         }
 
         protected void QuitCallback(Page page)
@@ -43,11 +45,30 @@ namespace AdmissionCampaign.ViewModels.Base
         #endregion
 
         #region Validates
-        protected static bool IsValidLogin(string login) => new Regex("[A-Za-z0-9]").IsMatch(login);
+        protected static bool IsValidLogin(string login)
+        {
+            return new Regex("[A-Za-z0-9]").IsMatch(login);
+        }
 
-        protected static bool IsValidName(string name) => new Regex("[А-Яа-яЁё]").IsMatch(name) && name.Length > 1;
+        protected static bool IsValidName(string name)
+        {
+            return new Regex("[А-Яа-яЁё]").IsMatch(name) && name.Length > 1;
+        }
 
-        protected static bool IsValidPassport(string passport) => new Regex("^[0-9]{6}$").IsMatch(passport);
+        protected static bool IsValidPassport(string passport)
+        {
+            return new Regex("^[0-9]{6}$").IsMatch(passport);
+        }
+
+        protected static bool IsValidSpecialityName(string name)
+        {
+            return new Regex("[А-Яа-яЁё\\s]+").IsMatch(name);
+        }
+
+        protected static bool IsValidSpecialityCode(string code)
+        {
+            return new Regex("\\d{2}\\.\\d{2}\\.\\d{2}").IsMatch(code);
+        }
         #endregion
     }
 
@@ -56,8 +77,14 @@ namespace AdmissionCampaign.ViewModels.Base
         #region Admin
         public static Uri AdminAddUniversity { get; } = GetUri("Admin/AddUniversityPage");
         public static Uri AdminMenu { get; } = GetUri("Admin/AdminMenuPage");
+        public static Uri AdminAddSpeciality { get; } = GetUri("Admin/AddSpecialityPage");
+        public static Uri AdminAddExam { get; } = GetUri("Admin/AddExamPage");
         public static Uri AdminUniversitiesList { get; } = GetUri("Admin/UniversitiesListPage");
-        public static Uri AdminAddSpeciality { get; } = GetUri("Admin/AddSpecialitylPage");
+        public static Uri AdminSpecialitiesList { get; } = GetUri("Admin/SpecialitiesListPage");
+        public static Uri AdminExamsList { get; } = GetUri("Admin/ExamsListPage");
+        public static Uri AdminUniversityEdit { get; } = GetUri("Admin/UniversityEditPage");
+        public static Uri AdminSpecialityEdit { get; } = GetUri("Admin/SpecialityEditPage");
+        public static Uri AdminExamEdit { get; } = GetUri("Admin/ExamEditPage");
         #endregion
 
         #region Enrolle
@@ -69,6 +96,9 @@ namespace AdmissionCampaign.ViewModels.Base
 
         #region University
         public static Uri UniversityPersonal { get; } = GetUri("University/UniversityPersonalPage");
+        public static Uri UniversityAnnounceAdmissionCampaigh { get; } = GetUri("University/AnnounceAdmissionCampaighPage");
+        public static Uri UniversityAdmissionCampaighsList { get; } = GetUri("University/AdmissionCampaighsListPage");
+        public static Uri UniversityEnrollesList { get; } = GetUri("University/EnrollesListPage");
         #endregion
 
         #region Main
@@ -76,6 +106,9 @@ namespace AdmissionCampaign.ViewModels.Base
         public static Uri ChooseLogin { get; } = GetUri("ChooseLoginPage");
         #endregion
 
-        private static Uri GetUri(string path) => new($"../../Views/Pages/{path}.xaml", UriKind.RelativeOrAbsolute);
+        private static Uri GetUri(string path)
+        {
+            return new($"../../Views/Pages/{path}.xaml", UriKind.RelativeOrAbsolute);
+        }
     }
 }

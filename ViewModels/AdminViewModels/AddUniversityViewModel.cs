@@ -7,8 +7,6 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
 {
     public class AddUniversityViewModel : ViewModel
     {
-        public AddUniversityViewModel() { }
-
         #region BindingFields
         private string name = "";
         private string login = "";
@@ -22,12 +20,12 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
         #endregion
 
         #region Commands
-        public static NavigationCommand MoveToAdminPanel { get => new(PageUriProvider.AdminMenu); }
+        public static NavigationCommand MoveToAdminMenu => new(PageUriProvider.AdminMenu);
 
-        public PageCallbackCommand Add { get => new(SaveCallback); }
+        public PageCallbackCommand Add => new(AddCallback);
         #endregion
 
-        private void SaveCallback(Page page)
+        private void AddCallback(Page page)
         {
             if (!IsValidName(Name))
             {
@@ -47,7 +45,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (Login.Length < 4 || Login.Length > 16)
+            if (Login.Length is < 4 or > 16)
             {
                 ErrorMessage = "Длина логина может быть от 4 до 16 символов латинского алфавита!";
                 return;
@@ -62,6 +60,12 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
             if (Password == null)
             {
                 ErrorMessage = "Придумайте пароль!";
+                return;
+            }
+
+            if (Password.Length < 6)
+            {
+                ErrorMessage = "Длина пароля минимум 6 символов!";
                 return;
             }
 

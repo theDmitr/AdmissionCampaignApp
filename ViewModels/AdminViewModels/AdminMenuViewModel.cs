@@ -5,12 +5,14 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
 {
     public class AdminMenuViewModel : ViewModel
     {
-        public AdminMenuViewModel() { }
-
         #region Commands
-        public static NavigationCommand MoveToAdminAddUniversity { get => new(PageUriProvider.AdminAddUniversity); }
-        public static NavigationCommand MoveToAdminUniversitiesList { get => new(PageUriProvider.AdminUniversitiesList); }
-        public PageCallbackCommand Quit { get => new(QuitCallback); }
+        public static NavigationCommand AddUniversity => new(PageUriProvider.AdminAddUniversity);
+        public static NavigationCommand AddSpeciality => new(PageUriProvider.AdminAddSpeciality);
+        public static NavigationCommand AddExam => new(PageUriProvider.AdminAddExam);
+        public static NavigationCommand MoveToUniversitiesList => new(PageUriProvider.AdminUniversitiesList);
+        public static NavigationCommand MoveToSpecialitiesList => new(PageUriProvider.AdminSpecialitiesList);
+        public static NavigationCommand MoveToExamsList => new(PageUriProvider.AdminExamsList);
+        public PageCallbackCommand Quit => new(QuitCallback);
         #endregion
     }
 }

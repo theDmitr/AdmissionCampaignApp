@@ -67,6 +67,18 @@
             <Setter Property="FontSize" Value="28"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+
+        <Style x:Key="TableStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="RowBackground" Value="Transparent" />
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="HeadersVisibility" Value="Column" />
+            <Setter Property="AutoGenerateColumns" Value="False" />
+            <Setter Property="IsReadOnly" Value="True" />
+            <Setter Property="CanUserResizeColumns" Value="False" />
+            <Setter Property="CanUserResizeRows" Value="False" />
+            <Setter Property="SelectionMode" Value="Single" />
+        </Style>
     </Application.Resources>
     
 </Application>

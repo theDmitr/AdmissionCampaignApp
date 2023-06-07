@@ -1,4 +1,4 @@
-﻿<Page x:Class="AdmissionCampaign.Views.Pages.Admin.UniversitiesListPage"
+﻿<Page x:Class="AdmissionCampaign.Views.Pages.Admin.ExamsListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,14 +9,14 @@
       MinWidth="600" MinHeight="500">
 
     <Page.DataContext>
-        <vm:UniversitiesListViewModel/>
+        <vm:ExamsListViewModel/>
     </Page.DataContext>
 
     <Grid>
-        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Список ВУЗов" Margin="15,15,0,0" />
+        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Список предметов" Margin="15,15,0,0" />
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <DataGrid Width="550" Height="280" ItemsSource="{Binding Universities}"
+            <DataGrid Width="550" Height="280" ItemsSource="{Binding Exams}"
                       Style="{StaticResource TableStyle}"
                       SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
                 <DataGrid.Columns>

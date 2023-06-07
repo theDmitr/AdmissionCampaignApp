@@ -22,38 +22,38 @@
 
     <Grid>
         <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Подача заявления" Margin="15,15,0,0" />
-        
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Orientation="Vertical">
 
-            <TabControl>
-                <TabItem Header="ВУЗ 1">
-                    
-                </TabItem>
-                <TabItem Header="ВУЗ 2">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
 
-                </TabItem>
-                <TabItem Header="ВУЗ 3">
+                <TabControl>
+                    <TabItem Header="ВУЗ 1">
 
-                </TabItem>
-                <TabItem Header="ВУЗ 4">
+                    </TabItem>
+                    <TabItem Header="ВУЗ 2">
 
-                </TabItem>
-                <TabItem Header="ВУЗ 5">
+                    </TabItem>
+                    <TabItem Header="ВУЗ 3">
 
-                </TabItem>
-            </TabControl>
+                    </TabItem>
+                    <TabItem Header="ВУЗ 4">
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    </TabItem>
+                    <TabItem Header="ВУЗ 5">
 
-                <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="DarkGray"
+                    </TabItem>
+                </TabControl>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+
+                    <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="DarkGray"
                             Command="{Binding MoveToEnrollePersonal}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
-                <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Сохранить"
+                    <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Сохранить"
                             Command="{Binding Save}"/>
+                </StackPanel>
             </StackPanel>
-
             <TextBlock Margin="0,20,0,0" Text="{Binding ErrorMessage}" Style="{StaticResource ErrorTextBlockStyle}" />
-
         </StackPanel>
     </Grid>
 </Page>

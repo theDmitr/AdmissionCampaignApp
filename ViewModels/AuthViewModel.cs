@@ -22,8 +22,8 @@ namespace AdmissionCampaign.ViewModels
         #endregion
 
         #region Commands
-        public static NavigationCommand MoveToChooseLogin { get => new(PageUriProvider.ChooseLogin); }
-        public PageCallbackCommand Auth { get => new(AuthCallback); }
+        public static NavigationCommand MoveToChooseLogin => new(PageUriProvider.ChooseLogin);
+        public PageCallbackCommand Auth => new(AuthCallback);
         #endregion
 
         private void AuthCallback(Page page)
@@ -57,11 +57,17 @@ namespace AdmissionCampaign.ViewModels
             dataContext.SessionUserID = user.ID;
 
             if (user.AcountType == User.AccountType.Admin)
+            {
                 NavigateToPage(page, PageUriProvider.AdminMenu);
+            }
             else if (user.AcountType == User.AccountType.University)
+            {
                 NavigateToPage(page, PageUriProvider.UniversityPersonal);
+            }
             else
+            {
                 NavigateToPage(page, PageUriProvider.EnrollePersonal);
+            }
         }
     }
 }

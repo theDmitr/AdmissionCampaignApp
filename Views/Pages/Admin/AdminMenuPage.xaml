@@ -13,20 +13,38 @@
     </Page.DataContext>
 
     <Grid>
-        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Админ панель" Margin="15,15,0,0" />
+        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Личный кабинет учебного заведения" Margin="15,15,0,0" />
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Добавить ВУЗ" 
-                Command="{Binding MoveToAdminAddUniversity}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,20,0">
+                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Добавить специальность" 
+                                Command="{Binding AddSpeciality}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Добавить ВУЗ" 
+                                Command="{Binding AddUniversity}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Добавить предмет" 
+                                Command="{Binding AddExam}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                </StackPanel>
 
-            <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список ВУЗов" 
-                Command="{Binding MoveToAdminUniversitiesList}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                <StackPanel Margin="20,0,0,0">
+                    <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список специальностей" 
+                                Command="{Binding MoveToSpecialitiesList}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список ВУЗов" 
+                                Command="{Binding MoveToUniversitiesList}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список предметов" 
+                                Command="{Binding MoveToExamsList}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                </StackPanel>
+            </StackPanel>
 
             <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Background="{StaticResource ButtonBackground2Color}" Content="Выйти" 
                 Command="{Binding Quit}"
-                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" Width="225"/>
         </StackPanel>
     </Grid>
 </Page>

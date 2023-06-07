@@ -15,64 +15,54 @@
 
     <Grid>
         <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Регистрация" Margin="15,15,0,0" />
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Width="220" Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,15,0">
 
-        <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Логин"/>
+                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Пароль"/>
+                        <customcontrols:BindablePasswordBox Margin="0,5,0,0" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <StackPanel Width="220" Grid.Column="0" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" Margin="0,0,15,0">
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Подтвердить пароль" />
+                        <customcontrols:BindablePasswordBox Margin="0,5,0,0" Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Логин"/>
-                <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
+                    </StackPanel>
 
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Пароль"/>
-                <customcontrols:BindablePasswordBox Margin="0,5,0,0" Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Width="220" Orientation="Vertical" VerticalAlignment="Center" Margin="15,0,0,0">
 
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Подтвердить пароль" />
-                <customcontrols:BindablePasswordBox Margin="0,5,0,0" Password="{Binding ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Фамилия" />
+                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
 
-            </StackPanel>
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Имя" />
+                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
 
-            <StackPanel Width="220" Grid.Column="1" Grid.Row="0" Orientation="Vertical" VerticalAlignment="Center" Margin="15,0,0,0">
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Отчество" />
+                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
 
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Фамилия" />
-                <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
-
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Имя" />
-                <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
-
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Отчество" />
-                <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged}" Margin="0,5,0,0"/>
-
-            </StackPanel>
-
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,15,0,0" Orientation="Vertical" VerticalAlignment="Center">
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Номер паспорта" Width="260" />
-                <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Passport, UpdateSourceTrigger=PropertyChanged}" Margin="110,5,110,0" />
-            </StackPanel>
-
-            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Vertical" Margin="0,30,0,0">
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Главная" Background="{StaticResource ButtonBackground2Color}"
-                            Command="{Binding MoveToChooseLogin}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
-                    <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Регистрация"
-                            Command="{Binding Register}" 
-                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    </StackPanel>
                 </StackPanel>
 
-                <TextBlock Margin="0,20,0,0" Text="{Binding ErrorMessage}" Style="{StaticResource ErrorTextBlockStyle}" />
+                <StackPanel Margin="0,15,0,0" Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Номер паспорта" Width="260" />
+                    <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Passport, UpdateSourceTrigger=PropertyChanged}" Margin="110,5,110,0" />
+                </StackPanel>
 
+                <StackPanel Orientation="Vertical" Margin="0,30,0,0">
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Главная" Background="{StaticResource ButtonBackground2Color}"
+                            Command="{Binding MoveToChooseLogin}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                        <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Регистрация"
+                            Command="{Binding Register}" 
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
-        </Grid>
+            <TextBlock Margin="0,20,0,0" Text="{Binding ErrorMessage}" Style="{StaticResource ErrorTextBlockStyle}" />
+        </StackPanel>
     </Grid>
 </Page>

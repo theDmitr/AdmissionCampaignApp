@@ -9,8 +9,6 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
 {
     public class RegisterViewModel : ViewModel
     {
-        public RegisterViewModel() { }
-
         #region BindingFields
         private string login = "";
         private SecureString password;
@@ -32,8 +30,8 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
         #endregion
 
         #region Commands
-        public static NavigationCommand MoveToChooseLogin { get => new(PageUriProvider.ChooseLogin); }
-        public PageCallbackCommand Register { get => new(RegisterCallback); }
+        public static NavigationCommand MoveToChooseLogin => new(PageUriProvider.ChooseLogin);
+        public PageCallbackCommand Register => new(RegisterCallback);
         #endregion
 
         private void RegisterCallback(Page page)
@@ -44,7 +42,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
                 return;
             }
 
-            if (Login.Length < 4 || Login.Length > 16)
+            if (Login.Length is < 4 or > 16)
             {
                 ErrorMessage = "Длина логина может быть от 4 до 16 символов латинского алфавита!";
                 return;
@@ -89,6 +87,12 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
             if (Password == null)
             {
                 ErrorMessage = "Придумайте пароль!";
+                return;
+            }
+
+            if (Password.Length < 6)
+            {
+                ErrorMessage = "Длина пароля минимум 6 символов!";
                 return;
             }
 

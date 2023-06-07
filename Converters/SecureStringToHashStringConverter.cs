@@ -26,14 +26,18 @@ namespace AdmissionCampaign.Converters
                     byte[] hashBytes = SHA256.HashData(bytes);
 
                     foreach (byte b in hashBytes)
-                        stringBuilder.Append(b.ToString("x2"));
+                    {
+                        _ = stringBuilder.Append(b.ToString("x2"));
+                    }
 
                     return stringBuilder.ToString();
                 }
                 finally
                 {
                     if (ptr != IntPtr.Zero)
+                    {
                         Marshal.ZeroFreeBSTR(ptr);
+                    }
                 }
             }
         }
@@ -41,12 +45,16 @@ namespace AdmissionCampaign.Converters
         public static SecureString ConvertStringToSecureString(string str)
         {
             if (str == null)
+            {
                 return null;
+            }
 
-            var securePassword = new SecureString();
+            SecureString securePassword = new();
 
             foreach (char c in str)
+            {
                 securePassword.AppendChar(c);
+            }
 
             securePassword.MakeReadOnly();
             return securePassword;
