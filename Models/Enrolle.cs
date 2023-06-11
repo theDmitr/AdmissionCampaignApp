@@ -10,7 +10,7 @@ namespace AdmissionCampaign.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Lastname { get; set; }
+        public string Patronymic { get; set; }
         public string Passport { get; set; }
         public int UserID { get; set; }
 
@@ -18,7 +18,7 @@ namespace AdmissionCampaign.Models
         {
             Name = name;
             Surname = surname;
-            Lastname = lastname;
+            Patronymic = lastname;
             Passport = passport;
             UserID = userid;
         }

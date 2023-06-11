@@ -5,53 +5,57 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:AdmissionCampaign.Views.Pages.Enrolle"
       xmlns:vm="clr-namespace:AdmissionCampaign.ViewModels.EnrolleViewModels"
-      mc:Ignorable="d" 
+      mc:Ignorable="d"
       MinWidth="600" MinHeight="500">
 
     <Page.DataContext>
         <vm:ApplicationViewModel/>
     </Page.DataContext>
 
-    <Page.Resources>
-        <DataTemplate x:Key="Tab">
-            <Border>
-                
-            </Border>
-        </DataTemplate>
-    </Page.Resources>
-
     <Grid>
         <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Подача заявления" Margin="15,15,0,0" />
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Vertical">
+            <StackPanel Orientation="Vertical">
 
-                <TabControl>
-                    <TabItem Header="ВУЗ 1">
+                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="ВУЗ"/>
+                <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
+                          ItemsSource="{Binding Universities}"
+                          SelectedValue="{Binding SelectedUniversity}"
+                          DisplayMemberPath="Name"/>
 
-                    </TabItem>
-                    <TabItem Header="ВУЗ 2">
+                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Специальность"/>
+                <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
+                          ItemsSource="{Binding AdmissionCampaighs}"
+                          SelectedValue="{Binding SelectedSpeciality}"
+                          DisplayMemberPath="YearSpeciality"/>
 
-                    </TabItem>
-                    <TabItem Header="ВУЗ 3">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                    <StackPanel Orientation="Vertical" Margin="0,0,5,0">
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam1}"/>
+                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam1Value, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
 
-                    </TabItem>
-                    <TabItem Header="ВУЗ 4">
+                    <StackPanel Orientation="Vertical" Margin="5,0,5,0">
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam2}"/>
+                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam2Value, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
 
-                    </TabItem>
-                    <TabItem Header="ВУЗ 5">
+                    <StackPanel Orientation="Vertical" Margin="5,0,0,0">
+                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam3}"/>
+                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam3Value, UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </StackPanel>
 
-                    </TabItem>
-                </TabControl>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-
-                    <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="DarkGray"
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+                    <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="{StaticResource ButtonBackground2Color}"
                             Command="{Binding MoveToEnrollePersonal}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
-                    <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Сохранить"
-                            Command="{Binding Save}"/>
+                    <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Отправить"
+                            Command="{Binding Send}" 
+                            CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
                 </StackPanel>
+
             </StackPanel>
             <TextBlock Margin="0,20,0,0" Text="{Binding ErrorMessage}" Style="{StaticResource ErrorTextBlockStyle}" />
         </StackPanel>

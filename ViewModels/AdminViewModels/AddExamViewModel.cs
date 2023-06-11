@@ -27,7 +27,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (dataContext.ExamsNameExists(Name))
+            if (dataContext.IsExamNameExists(Name))
             {
                 ErrorMessage = "Предмет с данным названием уже существует!";
                 return;

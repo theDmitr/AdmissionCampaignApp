@@ -12,6 +12,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
         public static NavigationCommand MoveToUniversitiesList => new(PageUriProvider.AdminUniversitiesList);
         public static NavigationCommand MoveToSpecialitiesList => new(PageUriProvider.AdminSpecialitiesList);
         public static NavigationCommand MoveToExamsList => new(PageUriProvider.AdminExamsList);
+        public static NavigationCommand MoveToEnrollesList => new(PageUriProvider.AdminEnrollesList);
         public PageCallbackCommand Quit => new(QuitCallback);
         #endregion
     }

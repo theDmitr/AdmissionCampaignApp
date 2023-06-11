@@ -18,5 +18,10 @@ namespace AdmissionCampaign.Models
         }
 
         public Exam() { }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

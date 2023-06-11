@@ -13,7 +13,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
             enrolle = dataContext.Enrolles.Where(e => e.UserID == dataContext.SessionUserID).Single();
             Surname = enrolle.Surname;
             Name = enrolle.Name;
-            Patronymic = enrolle.Lastname;
+            Patronymic = enrolle.Patronymic;
             Passport = enrolle.Passport;
         }
 
@@ -65,7 +65,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
                 return;
             }
 
-            if (enrolle.Passport != Passport && dataContext.PassportExists(Passport))
+            if (enrolle.Passport != Passport && dataContext.IsPassportExists(Passport))
             {
                 ErrorMessage = "Аккаунт с таким номером паспорта уже зарегистрирован!";
                 return;
@@ -73,7 +73,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
 
             enrolle.Surname = Surname;
             enrolle.Name = Name;
-            enrolle.Lastname = Patronymic;
+            enrolle.Patronymic = Patronymic;
             enrolle.Passport = Passport;
 
             _ = dataContext.SaveChanges();

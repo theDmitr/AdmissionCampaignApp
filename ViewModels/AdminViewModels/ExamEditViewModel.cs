@@ -40,7 +40,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (exam.Name != Name && dataContext.ExamNameExists(Name))
+            if (exam.Name != Name && dataContext.IsExamNameExists(Name))
             {
                 ErrorMessage = "Предмет с данным названием уже существует!";
                 return;
@@ -55,7 +55,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
 
         private void RemoveCallback(Page page)
         {
-            if (dataContext.SpecialitiesExamExists(exam.ID))
+            if (dataContext.IsUniversitySpecialityAdmissionCampaighExamExists(exam.ID))
             {
                 ErrorMessage = "Данный предмет используется в настоящий момент!";
                 return;

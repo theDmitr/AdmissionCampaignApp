@@ -10,10 +10,7 @@ namespace AdmissionCampaign.Models
         public int ID { get; set; }
 
         [Required]
-        public int UniversityID { get; set; }
-
-        [Required]
-        public int SpecialityID { get; set; }
+        public int UniversitySpecialityID { get; set; }
 
         [Required]
         public int PlacesCount { get; set; }
@@ -21,12 +18,23 @@ namespace AdmissionCampaign.Models
         [Required]
         public int Year { get; set; }
 
-        public UniversitySpecialityAdmissionCampaigh(int universityID, int specialityID, int placesCount, int year)
+        [Required]
+        public int Exam1ID { get; set; }
+
+        [Required]
+        public int Exam2ID { get; set; }
+
+        [Required]
+        public int Exam3ID { get; set; }
+
+        public UniversitySpecialityAdmissionCampaigh(int universitySpecialityID, int placesCount, int year, int exam1ID, int exam2ID, int exam3ID)
         {
-            UniversityID = universityID;
-            SpecialityID = specialityID;
+            UniversitySpecialityID = universitySpecialityID;
             PlacesCount = placesCount;
             Year = year;
+            Exam1ID = exam1ID;
+            Exam2ID = exam2ID;
+            Exam3ID = exam3ID;
         }
 
         public UniversitySpecialityAdmissionCampaigh() { }

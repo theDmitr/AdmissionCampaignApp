@@ -40,7 +40,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (university.Name != Name && dataContext.UniversityNameExists(Name))
+            if (university.Name != Name && dataContext.IsUniversityNameExists(Name))
             {
                 ErrorMessage = "Аккаунт с таким номером паспорта уже зарегистрирован!";
                 return;

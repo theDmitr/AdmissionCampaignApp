@@ -14,7 +14,16 @@ namespace AdmissionCampaign.Models
         public int EnrolleID { get; set; }
 
         [Required]
-        public int UniversitySpecialityID { get; set; }
+        public int UniversitySpecialityAdmissionCampaighID { get; set; }
+
+        [Required]
+        public int Exam1Value { get; set; }
+
+        [Required]
+        public int Exam2Value { get; set; }
+
+        [Required]
+        public int Exam3Value { get; set; }
 
         [Required]
         public EnrolleStatus EnrolleCurrentStatus { get; set; } = EnrolleStatus.Processing;
@@ -22,10 +31,13 @@ namespace AdmissionCampaign.Models
         [Required]
         public DateTime Date { get; set; }
 
-        public Petition(int enrolleID, int universitySpecialityID, DateTime date)
+        public Petition(int enrolleID, int universitySpecialityAdmissionCampaighID, int exam1Value, int exam2value, int exam3Value, DateTime date)
         {
             EnrolleID = enrolleID;
-            UniversitySpecialityID = universitySpecialityID;
+            UniversitySpecialityAdmissionCampaighID = universitySpecialityAdmissionCampaighID;
+            Exam1Value = exam1Value;
+            Exam2Value = exam2value;
+            Exam3Value = exam3Value;
             Date = date;
         }
 

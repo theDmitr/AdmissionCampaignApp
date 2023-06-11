@@ -1,4 +1,4 @@
-﻿<Page x:Class="AdmissionCampaign.Views.Pages.University.AdmissionCampaighsListPage"
+﻿<Page x:Class="AdmissionCampaign.Views.Pages.University.UniversitySpecialitiesListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,26 +9,23 @@
       MinWidth="600" MinHeight="500">
 
     <Page.DataContext>
-        <vm:AdmissionCampaighsListViewModel/>
+        <vm:UniversitySpecialitiesListViewModel/>
     </Page.DataContext>
 
     <Grid>
-        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Список приемных кампаний" Margin="15,15,0,0" />
+        <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Список специальностей ВУЗа" Margin="15,15,0,0" />
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <DataGrid Width="550" Height="280" ItemsSource="{Binding AdmissionCampaighs}"
+            <DataGrid Width="550" Height="280" ItemsSource="{Binding Specialities}"
                       Style="{StaticResource TableStyle}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="Auto" Header="Специальность" Binding="{Binding YearSpeciality}"/>
-                    <DataGridTextColumn Width="Auto" Header="Места" Binding="{Binding PlacesCount}"/>
-                    <DataGridTextColumn Width="Auto" Header="ЕГЭ - 1" Binding="{Binding Exam1}"/>
-                    <DataGridTextColumn Width="Auto" Header="ЕГЭ - 2" Binding="{Binding Exam2}"/>
-                    <DataGridTextColumn Width="*" Header="ЕГЭ - 3" Binding="{Binding Exam3}"/>
+                    <DataGridTextColumn Width="*" Header="Название" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Width="*" Header="Код" Binding="{Binding Code}"/>
                 </DataGrid.Columns>
             </DataGrid>
 
             <StackPanel Margin="0,20,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="{StaticResource ButtonBackground2Color}"
+                <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="{StaticResource ButtonBackground2Color}"
                             Command="{Binding MoveToUniversityPersonal}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
             </StackPanel>

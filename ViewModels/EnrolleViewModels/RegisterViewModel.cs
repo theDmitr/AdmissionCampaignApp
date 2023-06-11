@@ -48,7 +48,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
                 return;
             }
 
-            if (dataContext.LoginExists(Login))
+            if (dataContext.IsLoginExists(Login))
             {
                 ErrorMessage = "Введённый логин занят!";
                 return;
@@ -74,11 +74,11 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
 
             if (!IsValidPassport(Passport))
             {
-                ErrorMessage = "Некорректно указан номер пасспорта!";
+                ErrorMessage = "Некорректно указан номер паспорта!";
                 return;
             }
 
-            if (dataContext.PassportExists(Passport))
+            if (dataContext.IsPassportExists(Passport))
             {
                 ErrorMessage = "Аккаунт с таким номером паспорта уже зарегистрирован!";
                 return;

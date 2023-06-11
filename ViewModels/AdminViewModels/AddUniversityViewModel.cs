@@ -33,7 +33,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (dataContext.UniversityNameExists(Name))
+            if (dataContext.IsUniversityNameExists(Name))
             {
                 ErrorMessage = "ВУЗ с данным названием уже зарегистрирован!";
                 return;
@@ -51,7 +51,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (dataContext.LoginExists(Login))
+            if (dataContext.IsLoginExists(Login))
             {
                 ErrorMessage = "Введённый логин занят!";
                 return;

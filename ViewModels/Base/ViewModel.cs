@@ -1,6 +1,9 @@
 ﻿using AdmissionCampaign.Data;
+using AdmissionCampaign.Models;
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
@@ -70,6 +73,59 @@ namespace AdmissionCampaign.ViewModels.Base
             return new Regex("\\d{2}\\.\\d{2}\\.\\d{2}").IsMatch(code);
         }
         #endregion
+
+        #region GetUniversitySpecialityAndAdmissionCampaighs
+        protected ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> GetUniversitySpecialityAndAdmissionCampaighs(int universityID)
+        {
+            ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> result = new();
+            ObservableCollection<UniversitySpecialityAdmissionCampaigh> universitySpecialityAdmissionCampaighs = dataContext.GetUniversitySpecialityAdmissionCampaighs(universityID);
+
+            for (int i = 0; i < universitySpecialityAdmissionCampaighs.Count; i++)
+            {
+                UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh = universitySpecialityAdmissionCampaighs[i];
+
+                result.Add(new(
+                    dataContext.GetUniversityFromSession,
+                    dataContext.GetSpeciality(dataContext.GetUniversitySpeciality(universitySpecialityAdmissionCampaigh.UniversitySpecialityID).SpecialityID),
+                    universitySpecialityAdmissionCampaigh.ID,
+                    universitySpecialityAdmissionCampaigh.PlacesCount,
+                    universitySpecialityAdmissionCampaigh.Year,
+                    dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam1ID),
+                    dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam2ID),
+                    dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam3ID)));
+            }
+            return result;
+        }
+
+        protected ObservableCollection<EnrolleAndPetition> GetEnrollesAndPetitions(int universityID)
+        {
+            ObservableCollection<EnrolleAndPetition> result = new();
+
+            ObservableCollection<Petition> petitions = dataContext.GetUniversityPetitions(universityID);
+
+            foreach (Petition petition in petitions)
+            {
+                Enrolle enrolle = dataContext.Enrolles.Where(e => e.ID == petition.EnrolleID).Single();
+                UniversitySpeciality universitySpeciality = dataContext.UniversitySpecialities
+                    .Where(us => us.ID == dataContext.UniversitySpecialityAdmissionCampaighs
+                    .Where(ac => ac.ID == petition.UniversitySpecialityAdmissionCampaighID)
+                    .Single().UniversitySpecialityID)
+                    .Single();
+                Speciality speciality = dataContext.GetSpeciality(universitySpeciality.SpecialityID);
+                UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh = dataContext.UniversitySpecialityAdmissionCampaighs
+                    .Where(ac => ac.ID == petition.UniversitySpecialityAdmissionCampaighID)
+                    .Single();
+
+                result.Add(new(
+                    String.Join(' ', new string[] { enrolle.Name, enrolle.Surname, enrolle.Patronymic }),
+                    speciality,
+                    $"{dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam1ID)} : {petition.Exam1Value}",
+                    $"{dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam2ID)} : {petition.Exam2Value}",
+                    $"{dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam3ID)} : {petition.Exam3Value}"));
+            }
+            return result;
+        }
+        #endregion
     }
 
     public class PageUriProvider
@@ -82,6 +138,7 @@ namespace AdmissionCampaign.ViewModels.Base
         public static Uri AdminUniversitiesList { get; } = GetUri("Admin/UniversitiesListPage");
         public static Uri AdminSpecialitiesList { get; } = GetUri("Admin/SpecialitiesListPage");
         public static Uri AdminExamsList { get; } = GetUri("Admin/ExamsListPage");
+        public static Uri AdminEnrollesList { get; } = GetUri("Admin/EnrollesListPage");
         public static Uri AdminUniversityEdit { get; } = GetUri("Admin/UniversityEditPage");
         public static Uri AdminSpecialityEdit { get; } = GetUri("Admin/SpecialityEditPage");
         public static Uri AdminExamEdit { get; } = GetUri("Admin/ExamEditPage");
@@ -99,6 +156,8 @@ namespace AdmissionCampaign.ViewModels.Base
         public static Uri UniversityAnnounceAdmissionCampaigh { get; } = GetUri("University/AnnounceAdmissionCampaighPage");
         public static Uri UniversityAdmissionCampaighsList { get; } = GetUri("University/AdmissionCampaighsListPage");
         public static Uri UniversityEnrollesList { get; } = GetUri("University/EnrollesListPage");
+        public static Uri UniversityAddUniversitySpeciality { get; } = GetUri("University/AddUniversitySpecialityPage");
+        public static Uri UniversitySpecialitiesList { get; } = GetUri("University/UniversitySpecialitiesListPage");
         #endregion
 
         #region Main

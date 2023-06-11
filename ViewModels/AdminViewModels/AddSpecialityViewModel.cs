@@ -29,7 +29,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (dataContext.SpecialitiesNameExists(Name))
+            if (dataContext.IsSpecialityNameExists(Name))
             {
                 ErrorMessage = "Специальность с данным названием уже существует!";
                 return;

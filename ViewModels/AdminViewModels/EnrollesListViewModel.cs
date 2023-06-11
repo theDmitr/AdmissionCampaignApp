@@ -6,12 +6,13 @@ using System.Windows.Controls;
 
 namespace AdmissionCampaign.ViewModels.AdminViewModels
 {
-    public class SpecialitiesListViewModel : ViewModel
+    public class EnrollesListViewModel : ViewModel
     {
-        #region bindingFields
-        private Speciality selectedItem;
-        public ObservableCollection<Speciality> Specialities => new(dataContext.Specialities);
-        public Speciality SelectedItem { get => selectedItem; set => Set(ref selectedItem, value); }
+        #region BindingFields
+        private Enrolle selectedItem;
+
+        public ObservableCollection<Enrolle> Enrolles => new(dataContext.Enrolles);
+        public Enrolle SelectedItem { get => selectedItem; set => Set(ref selectedItem, value); }
         #endregion
 
         #region Commands
@@ -25,9 +26,6 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
             {
                 return;
             }
-
-            SpecialityEditViewModel.SpecialityID = SelectedItem.ID;
-            NavigateToPage(page, PageUriProvider.AdminSpecialityEdit);
         }
     }
 }

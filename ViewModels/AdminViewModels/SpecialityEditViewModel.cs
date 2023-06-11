@@ -43,7 +43,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (speciality.Name != Name && dataContext.SpecialityNameExists(Name))
+            if (speciality.Name != Name && dataContext.IsSpecialityNameExists(Name))
             {
                 ErrorMessage = "Специальность с данным названием уже существует!";
                 return;
@@ -55,7 +55,7 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
                 return;
             }
 
-            if (speciality.Code != Code && dataContext.SpecialityCodeExists(Code))
+            if (speciality.Code != Code && dataContext.IsSpecialityCodeExists(Code))
             {
                 ErrorMessage = "Указанный код специальности уже существует!";
                 return;

@@ -42,6 +42,10 @@
                 </StackPanel>
             </StackPanel>
 
+            <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список абитурентов" 
+                Command="{Binding MoveToEnrollesList}"
+                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" Width="225"/>
+
             <Button Margin="0,20,0,0" MinWidth="200" Style="{StaticResource ButtonStyle}" Background="{StaticResource ButtonBackground2Color}" Content="Выйти" 
                 Command="{Binding Quit}"
                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}" Width="225"/>

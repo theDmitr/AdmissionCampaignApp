@@ -18,6 +18,17 @@
         <SolidColorBrush x:Key="CurrentPageTextColor" Color="Black" />
         <SolidColorBrush x:Key="ErrorTextColor" Color="Red" />
 
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColor}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBoxTextColor}"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+
         <Style x:Key="LoginTextBoxStyle" TargetType="TextBox">
             <Setter Property="Background" Value="{StaticResource TextBoxBackgroundColor}"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderBrushColor}"/>
@@ -75,8 +86,8 @@
             <Setter Property="HeadersVisibility" Value="Column" />
             <Setter Property="AutoGenerateColumns" Value="False" />
             <Setter Property="IsReadOnly" Value="True" />
-            <Setter Property="CanUserResizeColumns" Value="False" />
-            <Setter Property="CanUserResizeRows" Value="False" />
+            <Setter Property="CanUserResizeColumns" Value="True" />
+            <Setter Property="CanUserResizeRows" Value="True" />
             <Setter Property="SelectionMode" Value="Single" />
         </Style>
     </Application.Resources>

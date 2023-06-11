@@ -15,15 +15,6 @@ namespace AdmissionCampaign.Models
         [Required]
         public string Code { get; set; }
 
-        [Required]
-        public int Exam1ID { get; set; }
-
-        [Required]
-        public int Exam2ID { get; set; }
-
-        [Required]
-        public int Exam3ID { get; set; }
-
         public Speciality(string name, string code)
         {
             Name = name;
@@ -31,5 +22,10 @@ namespace AdmissionCampaign.Models
         }
 
         public Speciality() { }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

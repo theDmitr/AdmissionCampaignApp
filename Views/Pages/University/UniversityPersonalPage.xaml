@@ -21,11 +21,19 @@
                     <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Объявить приемную кампанию" 
                                 Command="{Binding AnnounceAdmissionCampaigh}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+
+                    <Button MinWidth="200" Margin="0,20,0,0" Style="{StaticResource ButtonStyle}" Content="Добавить специальность" 
+                                Command="{Binding AddUniversitySpeciality}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
                 </StackPanel>
 
                 <StackPanel Margin="20,0,0,0">
                     <Button MinWidth="200" Style="{StaticResource ButtonStyle}" Content="Список приемных кампаний" 
                                 Command="{Binding MoveToAdmissionCampaighs}"
+                                CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
+
+                    <Button MinWidth="200" Margin="0,20,0,0" Style="{StaticResource ButtonStyle}" Content="Список специальностей" 
+                                Command="{Binding MoveToUniversitySpecialitiesList}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
                 </StackPanel>
             </StackPanel>
