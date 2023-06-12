@@ -17,14 +17,51 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
         {
             // Если петиции понадобятся этого года, то можно передать петиции, которые >= текущему году
             //Enrolles = GaleShapley.GetUniversityEnrollesList(dataContext.GetUniversityFromSession, new(dataContext.Universities), dataContext.GetEnrollesHavingPetitions, new(dataContext.Petitions));
-            GaleShapley.GaleShapleySort(new(dataContext.Enrolles), new(dataContext.Petitions), new(dataContext.UniversitySpecialityAdmissionCampaighs));
-            dataContext.SaveChanges();
-
-            Enrolles = GetEnrollesAndPetitions(dataContext.GetUniversityFromSession.ID);
+            UniversitySpecialities = new(dataContext.GetUniversitySpecialitiesAsSpecialities(dataContext.GetUniversityFromSession.ID));
         }
 
         #region BindingFields
-        public ObservableCollection<EnrolleAndPetition> Enrolles { get; }
+        private ObservableCollection<Speciality> universitySpecialities;
+        private ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> admissionCampaighs;
+
+        private Speciality selectedUniversitySpeciality;
+        private UniversitySpecialityAndAdmissionCampaigh selectedAdmissionCampaigh;
+
+        private ObservableCollection<EnrolleAndPetition> enrolles;
+
+        public ObservableCollection<Speciality> UniversitySpecialities { get => universitySpecialities; set => Set(ref universitySpecialities, value); }
+        public ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> AdmissionCampaighs { get => admissionCampaighs; set => Set(ref admissionCampaighs, value); }
+
+        public Speciality SelectedUniversitySpeciality
+        {
+            get => selectedUniversitySpeciality;
+            set
+            {
+                Set(ref selectedUniversitySpeciality, value);
+                AdmissionCampaighs = new(GetUniversitySpecialityAndAdmissionCampaighs(dataContext.GetUniversityFromSession.ID).Where(o => o.Speciality.ID == selectedUniversitySpeciality.ID));
+                Enrolles = null;
+            }
+        }
+
+        public UniversitySpecialityAndAdmissionCampaigh SelectedAdmissionCampaigh
+        {
+            get => selectedAdmissionCampaigh;
+            set
+            {
+                Set(ref selectedAdmissionCampaigh, value);
+
+                if (selectedAdmissionCampaigh != null)
+                {
+                    GaleShapley.GaleShapleySort(new(dataContext.Enrolles), new(dataContext.Petitions
+                    .Where(p => p.UniversitySpecialityAdmissionCampaighID == selectedAdmissionCampaigh.AdmissionCampaighID)), new(dataContext.UniversitySpecialityAdmissionCampaighs));
+                    dataContext.SaveChanges();
+
+                    Enrolles = GetEnrollesAndPetitions(dataContext.GetUniversityFromSession.ID, selectedAdmissionCampaigh.AdmissionCampaighID);
+                }
+            }
+        }
+
+        public ObservableCollection<EnrolleAndPetition> Enrolles { get => enrolles; set => Set(ref enrolles, value); }
         #endregion
 
         #region Commands
@@ -73,7 +110,11 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
                 {
                     admissionCampaigns.Remove(admissionCampaigh);
                     foreach (Petition cpetition in admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh))
+                    {
+                        if (cpetition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
+                            cpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
                         petitions.Remove(cpetition);
+                    }
                 }
             }
         }

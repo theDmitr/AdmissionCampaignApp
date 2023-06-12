@@ -16,14 +16,32 @@
         <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Список абитурентов" Margin="15,15,0,0" />
 
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,20">
+                <StackPanel Margin="0,0,10,0" Width="200">
+                    <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Специальность"/>
+                    <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
+                          ItemsSource="{Binding UniversitySpecialities}"
+                          SelectedValue="{Binding SelectedUniversitySpeciality}"
+                          DisplayMemberPath="Name"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,0,0" Width="200">
+                    <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="Приемная кампания"/>
+                    <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
+                          ItemsSource="{Binding AdmissionCampaighs}"
+                          SelectedValue="{Binding SelectedAdmissionCampaigh}"/>
+                </StackPanel>
+            </StackPanel>
+
             <DataGrid Width="550" Height="280" ItemsSource="{Binding Enrolles}"
                       Style="{StaticResource TableStyle}">
                 <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Место" Binding="{Binding Place}"/>
                     <DataGridTextColumn Width="*" Header="ФИО" Binding="{Binding Initials}"/>
-                    <DataGridTextColumn Width="*" Header="Специальность" Binding="{Binding Speciality}"/>
-                    <DataGridTextColumn Width="*" Header="ЕГЭ - 1" Binding="{Binding Exam1Value}"/>
-                    <DataGridTextColumn Width="*" Header="ЕГЭ - 2" Binding="{Binding Exam2Value}"/>
-                    <DataGridTextColumn Width="*" Header="ЕГЭ - 3" Binding="{Binding Exam3Value}"/>
+                    <DataGridTextColumn Width="*" Header="ЕГЭ - 1" Binding="{Binding Exam1String}"/>
+                    <DataGridTextColumn Width="*" Header="ЕГЭ - 2" Binding="{Binding Exam2String}"/>
+                    <DataGridTextColumn Width="*" Header="ЕГЭ - 3" Binding="{Binding Exam3String}"/>
+                    <DataGridTextColumn Width="*" Header="Общий балл" Binding="{Binding AllPoints}"/>
                 </DataGrid.Columns>
             </DataGrid>
 

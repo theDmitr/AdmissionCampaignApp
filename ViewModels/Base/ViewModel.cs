@@ -97,11 +97,13 @@ namespace AdmissionCampaign.ViewModels.Base
             return result;
         }
 
-        protected ObservableCollection<EnrolleAndPetition> GetEnrollesAndPetitions(int universityID)
+        protected ObservableCollection<EnrolleAndPetition> GetEnrollesAndPetitions(int universityID, int admissionCampaighID)
         {
             ObservableCollection<EnrolleAndPetition> result = new();
 
-            ObservableCollection<Petition> petitions = dataContext.GetUniversityPetitions(universityID);
+            ObservableCollection<Petition> petitions = new(dataContext.GetUniversityPetitions(universityID)
+                .Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID)
+                .OrderByDescending(p => p.Exam1Value + p.Exam2Value + p.Exam3Value));
 
             foreach (Petition petition in petitions)
             {
@@ -119,9 +121,13 @@ namespace AdmissionCampaign.ViewModels.Base
                 result.Add(new(
                     String.Join(' ', new string[] { enrolle.Name, enrolle.Surname, enrolle.Patronymic }),
                     speciality,
-                    $"{dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam1ID)} : {petition.Exam1Value}",
-                    $"{dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam2ID)} : {petition.Exam2Value}",
-                    $"{dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam3ID)} : {petition.Exam3Value}"));
+                    dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam1ID),
+                    dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam2ID),
+                    dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam3ID),
+                    petition.Exam1Value,
+                    petition.Exam2Value,
+                    petition.Exam3Value,
+                    petitions.IndexOf(petition) + 1));
             }
             return result;
         }
@@ -148,6 +154,7 @@ namespace AdmissionCampaign.ViewModels.Base
         public static Uri EnrolleRegister { get; } = GetUri("Enrolle/RegisterPage");
         public static Uri EnrollePersonal { get; } = GetUri("Enrolle/PersonalPage");
         public static Uri EnrolleApplication { get; } = GetUri("Enrolle/ApplicationPage");
+        public static Uri EnrollePetitions { get; } = GetUri("Enrolle/PetitionsPage");
         public static Uri EnrolleChangeData { get; } = GetUri("Enrolle/ChangeDataPage");
         #endregion
 

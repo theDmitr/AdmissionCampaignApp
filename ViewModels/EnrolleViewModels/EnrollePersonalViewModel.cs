@@ -7,6 +7,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
     {
         #region Commands
         public static NavigationCommand MoveToApplication => new(PageUriProvider.EnrolleApplication);
+        public static NavigationCommand MoveToPetitions => new(PageUriProvider.EnrollePetitions);
         public static NavigationCommand MoveToChangeData => new(PageUriProvider.EnrolleChangeData);
         public PageCallbackCommand Quit => new(QuitCallback);
         #endregion

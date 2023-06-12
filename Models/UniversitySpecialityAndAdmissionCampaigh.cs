@@ -30,5 +30,10 @@ namespace AdmissionCampaign.Models
             Exam2 = exam2;
             Exam3 = exam3;
         }
+
+        public override string ToString()
+        {
+            return YearSpeciality;
+        }
     }
 }
