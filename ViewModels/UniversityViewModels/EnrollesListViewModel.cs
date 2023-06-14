@@ -52,8 +52,7 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
 
                 if (selectedAdmissionCampaigh != null)
                 {
-                    GaleShapley.GaleShapleySort(new(dataContext.Enrolles), new(dataContext.Petitions
-                    .Where(p => p.UniversitySpecialityAdmissionCampaighID == selectedAdmissionCampaigh.AdmissionCampaighID)), new(dataContext.UniversitySpecialityAdmissionCampaighs));
+                    GaleShapley.GaleShapleySort(new(dataContext.Enrolles), selectedAdmissionCampaigh.AdmissionCampaighID, new(dataContext.UniversitySpecialityAdmissionCampaighs));
                     dataContext.SaveChanges();
 
                     Enrolles = GetEnrollesAndPetitions(dataContext.GetUniversityFromSession.ID, selectedAdmissionCampaigh.AdmissionCampaighID);
@@ -71,12 +70,13 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
 
     public class GaleShapley
     {
-        public static void GaleShapleySort(ObservableCollection<Enrolle> enrolles, ObservableCollection<Petition> petitions, ObservableCollection<UniversitySpecialityAdmissionCampaigh> admissionCampaigns)
+        public static void GaleShapleySort(ObservableCollection<Enrolle> enrolles, int admissionCampaighID, ObservableCollection<UniversitySpecialityAdmissionCampaigh> admissionCampaigns)
         {
             Dictionary<UniversitySpecialityAdmissionCampaigh, ObservableCollection<Petition>> admissionCampaighPetitions = new();
             Dictionary<Enrolle, ObservableCollection<Petition>> enrollesPetitions = new();
 
-            ObservableCollection<Petition> doPetitions = new(petitions);
+            ObservableCollection<Petition> petitions = new(DataContext.Instance.Petitions
+                    .Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID));
 
             foreach (UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh in admissionCampaigns)
             {
@@ -99,7 +99,9 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
                     {
                         petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Accepted;
                         petitions.Remove(petition);
-                        foreach (Petition lpetition in new ObservableCollection<Petition>(petitions.Where(p => p.EnrolleID == enrolle.ID)))
+                        foreach (Petition lpetition in new ObservableCollection<Petition>(DataContext.Instance.Petitions
+                            .Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID)
+                            .Where(p => p.EnrolleID == enrolle.ID)))
                         {
                             lpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
                             petitions.Remove(lpetition);
@@ -118,12 +120,6 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
                         petitions.Remove(cpetition);
                     }
                 }
-            }
-
-            foreach (Petition doPetition in doPetitions)
-            {
-                if (doPetition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
-                    doPetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
             }
         }
     }
