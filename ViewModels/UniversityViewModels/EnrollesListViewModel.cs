@@ -99,9 +99,7 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
                     {
                         petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Accepted;
                         petitions.Remove(petition);
-                        foreach (Petition lpetition in new ObservableCollection<Petition>(DataContext.Instance.Petitions
-                            .Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID)
-                            .Where(p => p.EnrolleID == enrolle.ID)))
+                        foreach (Petition lpetition in new ObservableCollection<Petition>(petitions.Where(p => p.EnrolleID == enrolle.ID)))
                         {
                             lpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
                             petitions.Remove(lpetition);
@@ -120,6 +118,13 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
                         petitions.Remove(cpetition);
                     }
                 }
+            }
+
+            foreach (Petition doPetition in new ObservableCollection<Petition>(DataContext.Instance.Petitions
+                    .Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID)))
+            {
+                if (doPetition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
+                    doPetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
             }
         }
     }
