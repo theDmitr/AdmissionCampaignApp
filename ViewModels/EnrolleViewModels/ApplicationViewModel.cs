@@ -96,6 +96,12 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
                 return;
             }
 
+            if (dataContext.Petitions.Any(p => p.UniversitySpecialityAdmissionCampaighID == selectedAdmissionCampaigh.AdmissionCampaighID && p.EnrolleID == dataContext.GetEnrolleFromSession.ID))
+            {
+                ErrorMessage = "Вы уже подавали заявку на данную специальность!";
+                return;
+            }
+
             dataContext.RegisterPetition(dataContext.GetEnrolleFromSession.ID, selectedAdmissionCampaigh.AdmissionCampaighID,
                 Exam1Value, Exam2Value, Exam3Value,
                 DateTime.Now);
