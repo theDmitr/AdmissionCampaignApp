@@ -80,16 +80,16 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
 
             foreach (UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh in admissionCampaigns)
             {
-                ObservableCollection<Petition> lpetitions = new(doPetitions.Where(p => p.UniversitySpecialityAdmissionCampaighID == universitySpecialityAdmissionCampaigh.ID));
+                ObservableCollection<Petition> lpetitions = new(petitions.Where(p => p.UniversitySpecialityAdmissionCampaighID == universitySpecialityAdmissionCampaigh.ID));
                 admissionCampaighPetitions.Add(universitySpecialityAdmissionCampaigh, new(lpetitions.OrderByDescending(p => p.Exam1Value + p.Exam2Value + p.Exam3Value)));
             }
 
             foreach (Enrolle enrolle in enrolles)
-                enrollesPetitions.Add(enrolle, new(doPetitions.Where(p => p.EnrolleID == enrolle.ID)));
+                enrollesPetitions.Add(enrolle, new(petitions.Where(p => p.EnrolleID == enrolle.ID)));
 
-            while (doPetitions.Count > 0 && enrolles.Count > 0)
+            while (petitions.Count > 0 && enrolles.Count > 0)
             {
-                Petition petition = doPetitions.FirstOrDefault();
+                Petition petition = petitions.FirstOrDefault();
                 Enrolle enrolle = enrolles.Where(e => e.ID == petition.EnrolleID).Single();
                 UniversitySpecialityAdmissionCampaigh admissionCampaigh = admissionCampaigns.Where(ac => ac.ID == petition.UniversitySpecialityAdmissionCampaighID).Single();
 
@@ -98,26 +98,32 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
                     if (admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh).IndexOf(petition) <= admissionCampaigh.PlacesCount)
                     {
                         petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Accepted;
-                        doPetitions.Remove(petition);
+                        petitions.Remove(petition);
                         foreach (Petition lpetition in new ObservableCollection<Petition>(petitions.Where(p => p.EnrolleID == enrolle.ID)))
                         {
                             lpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
-                            _ = doPetitions.Remove(lpetition);
+                            petitions.Remove(lpetition);
                         }
                         enrolles.Remove(enrolle);
                     }
                 }
 
-                if (admissionCampaigh.PlacesCount == doPetitions.Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID).ToList().Count)
+                if (admissionCampaigh.PlacesCount == petitions.Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID).ToList().Count)
                 {
                     admissionCampaigns.Remove(admissionCampaigh);
                     foreach (Petition cpetition in admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh))
                     {
                         if (cpetition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
                             cpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
-                        doPetitions.Remove(cpetition);
+                        petitions.Remove(cpetition);
                     }
                 }
+            }
+
+            foreach (Petition doPetition in doPetitions)
+            {
+                if (doPetition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
+                    doPetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
             }
         }
     }
