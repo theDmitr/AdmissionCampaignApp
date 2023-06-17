@@ -4,6 +4,7 @@ using AdmissionCampaign.ViewModels.Base;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -11,6 +12,9 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
 {
     public class ApplicationViewModel : ViewModel
     {
+        public static int petitionsToUniversity = 5;
+        public static int petitionsToUniversitySpeciality = 5;
+
         public ApplicationViewModel()
         {
             universities = new(dataContext.Universities);
@@ -99,6 +103,18 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
             if (dataContext.Petitions.Any(p => p.UniversitySpecialityAdmissionCampaighID == selectedAdmissionCampaigh.AdmissionCampaighID && p.EnrolleID == dataContext.GetEnrolleFromSession.ID))
             {
                 ErrorMessage = "Вы уже подавали заявку на данную специальность!";
+                return;
+            }
+
+            ObservableCollection<University> universities = new(
+                dataContext.Universities.Where(u => dataContext.Petitions.Any(p => p.Date.AddDays(365) <= DateTime.Now
+                && (p.EnrolleID == dataContext.GetEnrolleFromSession.ID)
+                && dataContext.UniversitySpecialityAdmissionCampaighs.Any(ac => (ac.ID == p.UniversitySpecialityAdmissionCampaighID)
+                && dataContext.UniversitySpecialities.Any(us => us.ID == ac.UniversitySpecialityID && us.UniversityID == u.ID)))));
+
+            if (universities.Count >= petitionsToUniversity && !universities.Contains(selectedUniversity))
+            {
+                ErrorMessage = $"Вы не можете подать в год заявок больше, чем в {petitionsToUniversity} ВУЗов!";
                 return;
             }
 

@@ -100,18 +100,6 @@ namespace AdmissionCampaign.Data
                 .Single().UniversityID));
         }
 
-        public ObservableCollection<Speciality> GetExistsUniversitySpecialitiesAsSpecialities(int universityID, int currentYear)
-        {
-            ObservableCollection<UniversitySpecialityAdmissionCampaigh> universitySpecialityAdmissionCampaighs = GetUniversitySpecialityAdmissionCampaighs(universityID);
-            IEnumerable<int> specialitiesID = GetUniversitySpecialities(universityID)
-                .Where(us => universitySpecialityAdmissionCampaighs
-                .Any(ac => ac.UniversitySpecialityID == us.ID && ac.Year >= currentYear))
-                .Select(us => us.SpecialityID);
-            return new(Specialities.Where(s => specialitiesID.Contains(s.ID)));
-        }
-
-        public ObservableCollection<Enrolle> GetEnrollesHavingPetitions => new(Enrolles.Where(e => Petitions.Any(p => p.EnrolleID == e.ID)));
-
         /// <summary>
         /// Получает User по ID из параметра
         /// </summary>
