@@ -53,7 +53,7 @@ namespace AdmissionCampaign.Data
                     }
                 }
 
-                if (admissionCampaigh.PlacesCount >= petitions.Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID).ToList().Count)
+                if (admissionCampaigh.PlacesCount >= petitions.Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID && p.EnrolleCurrentStatus == Petition.EnrolleStatus.Accepted).ToList().Count)
                 {
                     admissionCampaigns.Remove(admissionCampaigh);
                     foreach (Petition cpetition in admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh))
