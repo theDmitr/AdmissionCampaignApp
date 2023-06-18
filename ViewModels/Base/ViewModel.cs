@@ -102,7 +102,7 @@ namespace AdmissionCampaign.ViewModels.Base
             ObservableCollection<EnrolleAndPetition> result = new();
 
             ObservableCollection<Petition> petitions = new(dataContext.GetUniversityPetitions(universityID)
-                .Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID)
+                .Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID && p.EnrolleCurrentStatus == Petition.EnrolleStatus.Accepted)
                 .OrderByDescending(p => p.Exam1Value + p.Exam2Value + p.Exam3Value));
 
             foreach (Petition petition in petitions)

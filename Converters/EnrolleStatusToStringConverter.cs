@@ -17,7 +17,7 @@ namespace AdmissionCampaign.Converters
                 return null;
             return ((Petition.EnrolleStatus) value) switch
             {
-                Petition.EnrolleStatus.Processing => "Отказ",
+                Petition.EnrolleStatus.Refusal => "Отказ",
                 Petition.EnrolleStatus.Accepted => "Одобрено",
                 _ => "В рассмотрении"
             };

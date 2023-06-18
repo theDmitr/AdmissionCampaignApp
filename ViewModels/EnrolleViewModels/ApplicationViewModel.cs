@@ -107,10 +107,11 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
             }
 
             ObservableCollection<University> universities = new(
-                dataContext.Universities.Where(u => dataContext.Petitions.Any(p => p.Date.AddDays(365) <= DateTime.Now
+                dataContext.Universities.Where(u => dataContext.Petitions.Any(p => p.Date.AddDays(365) >= DateTime.Now
                 && (p.EnrolleID == dataContext.GetEnrolleFromSession.ID)
                 && dataContext.UniversitySpecialityAdmissionCampaighs.Any(ac => (ac.ID == p.UniversitySpecialityAdmissionCampaighID)
                 && dataContext.UniversitySpecialities.Any(us => us.ID == ac.UniversitySpecialityID && us.UniversityID == u.ID)))));
+
 
             if (universities.Count >= petitionsToUniversity && !universities.Contains(selectedUniversity))
             {
