@@ -17,7 +17,8 @@ namespace AdmissionCampaign.Data
             Dictionary<Enrolle, ObservableCollection<Petition>> enrollesPetitions = new();
 
             ObservableCollection<Petition> petitions = new(dataContext.Petitions
-                    /*.Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID)*/);
+                    .Where(p => dataContext.UniversitySpecialityAdmissionCampaighs
+                    .Where(ac => ac.ID == p.UniversitySpecialityAdmissionCampaighID).Single().Year == DateTime.Now.Year));
 
             foreach (Petition pet in petitions)
                 pet.EnrolleCurrentStatus = Petition.EnrolleStatus.Processing;
@@ -65,7 +66,8 @@ namespace AdmissionCampaign.Data
             }
 
             foreach (Petition doPetition in new ObservableCollection<Petition>(dataContext.Petitions
-                    /*.Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaighID)*/))
+                    .Where(p => dataContext.UniversitySpecialityAdmissionCampaighs
+                    .Where(ac => ac.ID == p.UniversitySpecialityAdmissionCampaighID).Single().Year == DateTime.Now.Year)))
             {
                 if (doPetition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
                     doPetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
