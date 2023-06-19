@@ -40,20 +40,32 @@ namespace AdmissionCampaign.Data
 
                 if (enrollesPetitions.GetValueOrDefault(enrolle).IndexOf(petition) == 0)
                 {
-                    if (admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh).IndexOf(petition) <= admissionCampaigh.PlacesCount)
+                    if (admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh).IndexOf(petition) < admissionCampaigh.PlacesCount)
                     {
                         petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Accepted;
                         petitions.Remove(petition);
+
                         foreach (Petition lpetition in new ObservableCollection<Petition>(petitions.Where(p => p.EnrolleID == enrolle.ID)))
                         {
                             lpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
                             petitions.Remove(lpetition);
+
+                            foreach (ObservableCollection<Petition> pet in admissionCampaighPetitions.Values)
+                            {
+                                while (pet.Contains(petition) && petition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
+                                {
+                                    petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
+                                    pet.Remove(petition);
+                                }
+                            }
                         }
                         enrolles.Remove(enrolle);
                     }
                 }
 
-                if (admissionCampaigh.PlacesCount >= petitions.Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID && p.EnrolleCurrentStatus == Petition.EnrolleStatus.Accepted).ToList().Count)
+                if (admissionCampaigh.PlacesCount <= dataContext.Petitions
+                    .Where(p => dataContext.UniversitySpecialityAdmissionCampaighs
+                    .Where(ac => ac.ID == p.UniversitySpecialityAdmissionCampaighID).Single().Year == DateTime.Now.Year).Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID && p.EnrolleCurrentStatus == Petition.EnrolleStatus.Accepted).ToList().Count)
                 {
                     admissionCampaigns.Remove(admissionCampaigh);
                     foreach (Petition cpetition in admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh))

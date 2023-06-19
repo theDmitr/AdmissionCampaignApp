@@ -17,15 +17,18 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
 
         #region Commands
         public static NavigationCommand MoveToAdminMenu => new(PageUriProvider.AdminMenu);
-        public PageCallbackCommand Edit => new(EditCallback);
+        public PageCallbackCommand ChangePassword => new(ChangePasswordCallback);
         #endregion
 
-        private void EditCallback(Page page)
+        private void ChangePasswordCallback(Page page)
         {
             if (SelectedItem == null)
             {
                 return;
             }
+
+            ChangeEnrollePasswordViewModel.UserID = SelectedItem.UserID;
+            NavigateToPage(page, PageUriProvider.AdminChangeEnrollePassword);
         }
     }
 }

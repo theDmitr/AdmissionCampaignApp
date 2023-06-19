@@ -145,6 +145,8 @@ namespace AdmissionCampaign.ViewModels.Base
         public static Uri AdminSpecialitiesList { get; } = GetUri("Admin/SpecialitiesListPage");
         public static Uri AdminExamsList { get; } = GetUri("Admin/ExamsListPage");
         public static Uri AdminEnrollesList { get; } = GetUri("Admin/EnrollesListPage");
+        public static Uri AdminChangeEnrollePassword { get; } = GetUri("Admin/ChangeEnrollePasswordPage");
+        public static Uri AdminChangeUniversityPassword { get; } = GetUri("Admin/ChangeUniversityPasswordPage");
         public static Uri AdminUniversityEdit { get; } = GetUri("Admin/UniversityEditPage");
         public static Uri AdminSpecialityEdit { get; } = GetUri("Admin/SpecialityEditPage");
         public static Uri AdminExamEdit { get; } = GetUri("Admin/ExamEditPage");
