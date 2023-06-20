@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace AdmissionCampaign.Data
 {
@@ -32,49 +33,56 @@ namespace AdmissionCampaign.Data
             foreach (Enrolle enrolle in enrolles)
                 enrollesPetitions.Add(enrolle, new(petitions.Where(p => p.EnrolleID == enrolle.ID)));
 
+            int idx = 0;
+
             while (petitions.Count > 0 && enrolles.Count > 0)
             {
-                Petition petition = petitions.FirstOrDefault();
+                Petition petition = petitions[idx];
                 Enrolle enrolle = enrolles.Where(e => e.ID == petition.EnrolleID).Single();
                 UniversitySpecialityAdmissionCampaigh admissionCampaigh = admissionCampaigns.Where(ac => ac.ID == petition.UniversitySpecialityAdmissionCampaighID).Single();
 
-                if (enrollesPetitions.GetValueOrDefault(enrolle).IndexOf(petition) == 0)
+                if (admissionCampaigh.PlacesCount <= admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh)
+                    .Count(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID && p.EnrolleCurrentStatus == Petition.EnrolleStatus.Accepted))
                 {
-                    if (admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh).IndexOf(petition) < admissionCampaigh.PlacesCount)
+                    ObservableCollection<Petition> pets = new(admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh));
+                    foreach (Petition pet in pets)
                     {
-                        petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Accepted;
-                        petitions.Remove(petition);
-
-                        foreach (Petition lpetition in new ObservableCollection<Petition>(petitions.Where(p => p.EnrolleID == enrolle.ID)))
+                        if (pet.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
                         {
-                            lpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
-                            petitions.Remove(lpetition);
-
-                            foreach (ObservableCollection<Petition> pet in admissionCampaighPetitions.Values)
-                            {
-                                while (pet.Contains(petition) && petition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
-                                {
-                                    petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
-                                    pet.Remove(petition);
-                                }
-                            }
+                            pet.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
+                            admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh).Remove(pet);
+                            enrollesPetitions[enrolles.Where(e => e.ID == pet.EnrolleID).Single()].Remove(pet);
                         }
-                        enrolles.Remove(enrolle);
+                        petitions.Remove(pet);
                     }
+                    
+                    admissionCampaigns.Remove(admissionCampaigh);
                 }
 
-                if (admissionCampaigh.PlacesCount <= dataContext.Petitions
-                    .Where(p => dataContext.UniversitySpecialityAdmissionCampaighs
-                    .Where(ac => ac.ID == p.UniversitySpecialityAdmissionCampaighID).Single().Year == DateTime.Now.Year).Where(p => p.UniversitySpecialityAdmissionCampaighID == admissionCampaigh.ID && p.EnrolleCurrentStatus == Petition.EnrolleStatus.Accepted).ToList().Count)
+                else if (enrollesPetitions.GetValueOrDefault(enrolle).IndexOf(petition) == 0
+                    && admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh).IndexOf(petition) < admissionCampaigh.PlacesCount)
                 {
-                    admissionCampaigns.Remove(admissionCampaigh);
-                    foreach (Petition cpetition in admissionCampaighPetitions.GetValueOrDefault(admissionCampaigh))
+                    petition.EnrolleCurrentStatus = Petition.EnrolleStatus.Accepted;
+
+                    ObservableCollection<ObservableCollection<Petition>> pets = new(admissionCampaighPetitions.Values);
+
+                    foreach (ObservableCollection<Petition> pet in pets)
                     {
-                        if (cpetition.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
-                            cpetition.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
-                        petitions.Remove(cpetition);
+                        foreach (Petition spet in pet.Where(p => p.EnrolleID == enrolle.ID))
+                        {
+                            if (spet.EnrolleCurrentStatus != Petition.EnrolleStatus.Accepted)
+                            {
+                                spet.EnrolleCurrentStatus = Petition.EnrolleStatus.Refusal;
+                                admissionCampaighPetitions[admissionCampaigh].Remove(spet);
+                            }
+                            petitions.Remove(spet);
+                        }
                     }
+                    enrolles.Remove(enrolle);
                 }
+
+                if (++idx >= petitions.Count)
+                    idx = 0;
             }
 
             foreach (Petition doPetition in new ObservableCollection<Petition>(dataContext.Petitions
