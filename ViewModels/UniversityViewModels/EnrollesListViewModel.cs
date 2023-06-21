@@ -2,12 +2,9 @@
 using AdmissionCampaign.Data;
 using AdmissionCampaign.Models;
 using AdmissionCampaign.ViewModels.Base;
-using Microsoft.VisualBasic;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace AdmissionCampaign.ViewModels.UniversityViewModels
 {
@@ -35,7 +32,7 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
             get => selectedUniversitySpeciality;
             set
             {
-                Set(ref selectedUniversitySpeciality, value);
+                _ = Set(ref selectedUniversitySpeciality, value);
                 AdmissionCampaighs = new(GetUniversitySpecialityAndAdmissionCampaighs(dataContext.GetUniversityFromSession.ID).Where(o => o.Speciality.ID == selectedUniversitySpeciality.ID));
                 Enrolles = null;
             }
@@ -46,12 +43,12 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
             get => selectedAdmissionCampaigh;
             set
             {
-                Set(ref selectedAdmissionCampaigh, value);
+                _ = Set(ref selectedAdmissionCampaigh, value);
 
                 if (selectedAdmissionCampaigh != null)
                 {
                     new GaleShapley().GaleShapleySort(new(dataContext.Enrolles), selectedAdmissionCampaigh.AdmissionCampaighID, new(dataContext.UniversitySpecialityAdmissionCampaighs));
-                    dataContext.SaveChanges();
+                    _ = dataContext.SaveChanges();
 
                     Enrolles = GetEnrollesAndPetitions(dataContext.GetUniversityFromSession.ID, selectedAdmissionCampaigh.AdmissionCampaighID);
                 }

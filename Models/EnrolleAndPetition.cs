@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO.Packaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdmissionCampaign.Models
+﻿namespace AdmissionCampaign.Models
 {
     public class EnrolleAndPetition
     {

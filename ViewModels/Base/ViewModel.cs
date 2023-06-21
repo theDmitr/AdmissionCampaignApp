@@ -119,7 +119,7 @@ namespace AdmissionCampaign.ViewModels.Base
                     .Single();
 
                 result.Add(new(
-                    String.Join(' ', new string[] { enrolle.Name, enrolle.Surname, enrolle.Patronymic }),
+                    string.Join(' ', new string[] { enrolle.Name, enrolle.Surname, enrolle.Patronymic }),
                     speciality,
                     dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam1ID),
                     dataContext.GetExam(universitySpecialityAdmissionCampaigh.Exam2ID),

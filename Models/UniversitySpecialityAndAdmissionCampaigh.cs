@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdmissionCampaign.Models
+﻿namespace AdmissionCampaign.Models
 {
     public class UniversitySpecialityAndAdmissionCampaigh
     {
@@ -21,7 +15,7 @@ namespace AdmissionCampaign.Models
 
         public UniversitySpecialityAndAdmissionCampaigh(University university, Speciality speciality, int admissionCampaighID, int placesCount, int year, Exam exam1, Exam exam2, Exam exam3)
         {
-            University = university; 
+            University = university;
             Speciality = speciality;
             AdmissionCampaighID = admissionCampaighID;
             PlacesCount = placesCount;

@@ -13,6 +13,11 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
         }
 
         #region BindingFields
+        private UniversitySpecialityAndAdmissionCampaigh selected;
+        private string errorMessage;
+        
+        public UniversitySpecialityAndAdmissionCampaigh Selected { get => selected; set => Set(ref selected, value); }
+        public string ErrorMessage { get => errorMessage; set => Set(ref errorMessage, value); }
         public ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> AdmissionCampaighs { get; set; }
         #endregion
 

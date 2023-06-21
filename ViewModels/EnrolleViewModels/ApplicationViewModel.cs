@@ -4,9 +4,7 @@ using AdmissionCampaign.ViewModels.Base;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AdmissionCampaign.ViewModels.EnrolleViewModels
 {
@@ -35,23 +33,23 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
         private int exam2Value;
         private int exam3Value;
 
-        public University SelectedUniversity 
-        { 
-            get => selectedUniversity; 
-            set 
+        public University SelectedUniversity
+        {
+            get => selectedUniversity;
+            set
             {
-                Set(ref selectedUniversity, value);
+                _ = Set(ref selectedUniversity, value);
                 AdmissionCampaighs = new(GetUniversitySpecialityAndAdmissionCampaighs(selectedUniversity.ID).Where(ac => ac.Year >= DateTime.Now.Year));
                 SelectedSpeciality = null;
-            } 
+            }
         }
 
         public UniversitySpecialityAndAdmissionCampaigh SelectedSpeciality
-        { 
+        {
             get => selectedAdmissionCampaigh;
             set
             {
-                Set(ref selectedAdmissionCampaigh, value);
+                _ = Set(ref selectedAdmissionCampaigh, value);
                 if (selectedAdmissionCampaigh == null)
                 {
                     Exam1 = null;
@@ -119,7 +117,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
                 return;
             }
 
-            dataContext.RegisterPetition(dataContext.GetEnrolleFromSession.ID, selectedAdmissionCampaigh.AdmissionCampaighID,
+            _ = dataContext.RegisterPetition(dataContext.GetEnrolleFromSession.ID, selectedAdmissionCampaigh.AdmissionCampaighID,
                 Exam1Value, Exam2Value, Exam3Value,
                 DateTime.Now);
 

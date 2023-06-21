@@ -1,11 +1,7 @@
 ﻿using AdmissionCampaign.Commands;
 using AdmissionCampaign.Converters;
 using AdmissionCampaign.ViewModels.Base;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace AdmissionCampaign.ViewModels.AdminViewModels
@@ -23,8 +19,8 @@ namespace AdmissionCampaign.ViewModels.AdminViewModels
         #endregion
 
         #region Commands
-        public static NavigationCommand MoveToUniversitiesList { get => new(PageUriProvider.AdminUniversitiesList); }
-        public PageCallbackCommand Save { get => new(SaveCallback); }
+        public static NavigationCommand MoveToUniversitiesList => new(PageUriProvider.AdminUniversitiesList);
+        public PageCallbackCommand Save => new(SaveCallback);
         #endregion
 
         private void SaveCallback(Page page)
