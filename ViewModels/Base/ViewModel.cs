@@ -78,7 +78,7 @@ namespace AdmissionCampaign.ViewModels.Base
         protected ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> GetUniversitySpecialityAndAdmissionCampaighs(int universityID)
         {
             ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> result = new();
-            ObservableCollection<UniversitySpecialityAdmissionCampaigh> universitySpecialityAdmissionCampaighs = dataContext.GetUniversitySpecialityAdmissionCampaighs(universityID);
+            ObservableCollection<UniversitySpecialityAdmissionCampaigh> universitySpecialityAdmissionCampaighs = dataContext.GetUniversitySpecialityAdmissionCampaigns(universityID);
 
             for (int i = 0; i < universitySpecialityAdmissionCampaighs.Count; i++)
             {
@@ -109,12 +109,12 @@ namespace AdmissionCampaign.ViewModels.Base
             {
                 Enrolle enrolle = dataContext.Enrolles.Where(e => e.ID == petition.EnrolleID).Single();
                 UniversitySpeciality universitySpeciality = dataContext.UniversitySpecialities
-                    .Where(us => us.ID == dataContext.UniversitySpecialityAdmissionCampaighs
+                    .Where(us => us.ID == dataContext.UniversitySpecialityAdmissionCampaigns
                     .Where(ac => ac.ID == petition.UniversitySpecialityAdmissionCampaighID)
                     .Single().UniversitySpecialityID)
                     .Single();
                 Speciality speciality = dataContext.GetSpeciality(universitySpeciality.SpecialityID);
-                UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh = dataContext.UniversitySpecialityAdmissionCampaighs
+                UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh = dataContext.UniversitySpecialityAdmissionCampaigns
                     .Where(ac => ac.ID == petition.UniversitySpecialityAdmissionCampaighID)
                     .Single();
 

@@ -107,13 +107,25 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
             ObservableCollection<University> universities = new(
                 dataContext.Universities.Where(u => dataContext.Petitions.Any(p => p.Date.AddDays(365) >= DateTime.Now
                 && (p.EnrolleID == dataContext.GetEnrolleFromSession.ID)
-                && dataContext.UniversitySpecialityAdmissionCampaighs.Any(ac => (ac.ID == p.UniversitySpecialityAdmissionCampaighID)
+                && dataContext.UniversitySpecialityAdmissionCampaigns.Any(ac => (ac.ID == p.UniversitySpecialityAdmissionCampaighID)
                 && dataContext.UniversitySpecialities.Any(us => us.ID == ac.UniversitySpecialityID && us.UniversityID == u.ID)))));
+
+            ObservableCollection<Petition> petitions = new(
+                dataContext.Petitions.Where(p => p.EnrolleID == dataContext.GetEnrolleFromSession.ID
+                && selectedUniversity.ID == dataContext.UniversitySpecialities
+                .Where(us => us.ID == dataContext.UniversitySpecialityAdmissionCampaigns
+                .Where(ac => ac.ID == selectedAdmissionCampaigh.AdmissionCampaighID).Single().UniversitySpecialityID).Single().UniversityID));
 
 
             if (universities.Count >= petitionsToUniversity && !universities.Contains(selectedUniversity))
             {
                 ErrorMessage = $"Вы не можете подать в год заявок больше, чем в {petitionsToUniversity} ВУЗов!";
+                return;
+            }
+
+            if (universities.Contains(selectedUniversity) && petitions.Count >= petitionsToUniversitySpeciality)
+            {
+                ErrorMessage = $"Вы не можете подать в год больше, чем {petitionsToUniversitySpeciality} заявок в один ВУЗ!";
                 return;
             }
 

@@ -47,7 +47,7 @@ namespace AdmissionCampaign.ViewModels.UniversityViewModels
 
                 if (selectedAdmissionCampaigh != null)
                 {
-                    new GaleShapley().GaleShapleySort(new(dataContext.Enrolles), selectedAdmissionCampaigh.AdmissionCampaighID, new(dataContext.UniversitySpecialityAdmissionCampaighs));
+                    new GaleShapley().GaleShapleySort(new(dataContext.Enrolles), selectedAdmissionCampaigh.AdmissionCampaighID, new(dataContext.UniversitySpecialityAdmissionCampaigns));
                     _ = dataContext.SaveChanges();
 
                     Enrolles = GetEnrollesAndPetitions(dataContext.GetUniversityFromSession.ID, selectedAdmissionCampaigh.AdmissionCampaighID);

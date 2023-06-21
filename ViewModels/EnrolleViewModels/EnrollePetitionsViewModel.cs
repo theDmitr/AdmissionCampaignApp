@@ -16,7 +16,7 @@ namespace AdmissionCampaign.ViewModels.EnrolleViewModels
                 ObservableCollection<PetitionAndAdmissionCampaigh> result = new();
                 foreach (Petition petition in dataContext.Petitions.Where(p => p.EnrolleID == dataContext.GetEnrolleFromSession.ID))
                 {
-                    University u = dataContext.Universities.Where(u => u.ID == dataContext.UniversitySpecialities.Where(us => us.ID == dataContext.UniversitySpecialityAdmissionCampaighs
+                    University u = dataContext.Universities.Where(u => u.ID == dataContext.UniversitySpecialities.Where(us => us.ID == dataContext.UniversitySpecialityAdmissionCampaigns
                             .Where(ac => ac.ID == petition.UniversitySpecialityAdmissionCampaighID).Single().UniversitySpecialityID).Single().UniversityID).Single();
 
                     result.Add(

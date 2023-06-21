@@ -24,7 +24,7 @@ namespace AdmissionCampaign.Data
 
         #region Tables
         public DbSet<User> Users { get; set; }
-        public DbSet<UniversitySpecialityAdmissionCampaigh> UniversitySpecialityAdmissionCampaighs { get; set; }
+        public DbSet<UniversitySpecialityAdmissionCampaigh> UniversitySpecialityAdmissionCampaigns { get; set; }
         public DbSet<University> Universities { get; set; }
         public DbSet<Speciality> Specialities { get; set; }
         public DbSet<UniversitySpeciality> UniversitySpecialities { get; set; }
@@ -83,9 +83,9 @@ namespace AdmissionCampaign.Data
             return new(UniversitySpecialities.Where(us => us.UniversityID == universityID));
         }
 
-        public ObservableCollection<UniversitySpecialityAdmissionCampaigh> GetUniversitySpecialityAdmissionCampaighs(int universityID)
+        public ObservableCollection<UniversitySpecialityAdmissionCampaigh> GetUniversitySpecialityAdmissionCampaigns(int universityID)
         {
-            return new(UniversitySpecialityAdmissionCampaighs
+            return new(UniversitySpecialityAdmissionCampaigns
             .Where(ac => UniversitySpecialities.Where(us => us.ID == ac.UniversitySpecialityID).Single().UniversityID == universityID));
         }
 
@@ -93,7 +93,7 @@ namespace AdmissionCampaign.Data
         {
             return new(Petitions
                 .Where(p => universityID == UniversitySpecialities
-                .Where(us => us.ID == UniversitySpecialityAdmissionCampaighs
+                .Where(us => us.ID == UniversitySpecialityAdmissionCampaigns
                 .Where(ac => ac.ID == p.UniversitySpecialityAdmissionCampaighID)
                 .Single().UniversitySpecialityID)
                 .Single().UniversityID));
@@ -220,7 +220,7 @@ namespace AdmissionCampaign.Data
         /// <returns></returns>
         public bool IsUniversitySpecialityAdmissionCampaighExamExists(int ID)
         {
-            return UniversitySpecialityAdmissionCampaighs.Any(s => s.Exam1ID == ID || s.Exam2ID == ID || s.Exam3ID == ID);
+            return UniversitySpecialityAdmissionCampaigns.Any(s => s.Exam1ID == ID || s.Exam2ID == ID || s.Exam3ID == ID);
         }
 
         /// <summary>
@@ -232,10 +232,10 @@ namespace AdmissionCampaign.Data
         /// <returns></returns>
         public bool IsUniversityAdmissionCampaignExists(int universityID, int specialityID, int year)
         {
-            if (GetUniversitySpecialityAdmissionCampaighs(universityID)
+            if (GetUniversitySpecialityAdmissionCampaigns(universityID)
                 .Any(ac => ac.UniversitySpecialityID == GetUniversitySpecialityBySpeciality(universityID, specialityID).ID))
             {
-                UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh = GetUniversitySpecialityAdmissionCampaighs(universityID)
+                UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh = GetUniversitySpecialityAdmissionCampaigns(universityID)
                 .Where(ac => ac.UniversitySpecialityID == GetUniversitySpecialityBySpeciality(universityID, specialityID).ID).Single();
                 if (universitySpecialityAdmissionCampaigh.Year == year)
                 {
@@ -346,7 +346,7 @@ namespace AdmissionCampaign.Data
         public UniversitySpecialityAdmissionCampaigh RegisterUniversitySpecialityAdmissionCampaigh(int universitySpecialityID, int placesCount, int year, int exam1ID, int exam2ID, int exam3ID)
         {
             UniversitySpecialityAdmissionCampaigh universitySpecialityAdmissionCampaigh = new(universitySpecialityID, placesCount, year, exam1ID, exam2ID, exam3ID);
-            _ = UniversitySpecialityAdmissionCampaighs.Add(universitySpecialityAdmissionCampaigh);
+            _ = UniversitySpecialityAdmissionCampaigns.Add(universitySpecialityAdmissionCampaigh);
             _ = SaveChanges();
 
             return universitySpecialityAdmissionCampaigh;
@@ -402,6 +402,18 @@ namespace AdmissionCampaign.Data
         public void RemoveExam(int ID)
         {
             _ = Exams.Where(e => e.ID == ID).ExecuteDelete();
+            _ = SaveChanges();
+        }
+
+        public void RemoveUniversitySpecialityAdmissionCampaign(int ID)
+        {
+            _ = UniversitySpecialityAdmissionCampaigns.Where(ac => ac.ID == ID).ExecuteDelete();
+            _ = SaveChanges();
+        }
+
+        public void RemoveUniversitySpeciality(int ID)
+        {
+            _ = UniversitySpecialities.Where(us => us.ID == ID).ExecuteDelete();
             _ = SaveChanges();
         }
         #endregion

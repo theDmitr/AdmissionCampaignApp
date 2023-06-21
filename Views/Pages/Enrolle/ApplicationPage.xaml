@@ -16,46 +16,48 @@
         <TextBlock Style="{StaticResource CurrentPageTextBlockStyle}" Text="Подача заявления" Margin="15,15,0,0" />
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel Orientation="Vertical">
+            <StackPanel>
+                <StackPanel Orientation="Vertical">
 
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="ВУЗ"/>
-                <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
+                    <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="ВУЗ"/>
+                    <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
                           ItemsSource="{Binding Universities}"
                           SelectedValue="{Binding SelectedUniversity}"
                           DisplayMemberPath="Name"/>
 
-                <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Специальность"/>
-                <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
+                    <TextBlock Style="{StaticResource LoginTextBlockStyle}" Margin="0,15,0,0" Text="Специальность"/>
+                    <ComboBox Style="{StaticResource ComboBoxStyle}" Margin="0,5,0,0"
                           ItemsSource="{Binding AdmissionCampaighs}"
                           SelectedValue="{Binding SelectedSpeciality}"
                           DisplayMemberPath="YearSpeciality"/>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
-                    <StackPanel Orientation="Vertical" Margin="0,0,5,0">
-                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam1}"/>
-                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam1Value, UpdateSourceTrigger=PropertyChanged}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                        <StackPanel Orientation="Vertical" Margin="0,0,5,0">
+                            <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam1}"/>
+                            <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam1Value, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="5,0,5,0">
+                            <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam2}"/>
+                            <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam2Value, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Margin="5,0,0,0">
+                            <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam3}"/>
+                            <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam3Value, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
                     </StackPanel>
 
-                    <StackPanel Orientation="Vertical" Margin="5,0,5,0">
-                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam2}"/>
-                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam2Value, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical" Margin="5,0,0,0">
-                        <TextBlock Style="{StaticResource LoginTextBlockStyle}" Text="{Binding Exam3}"/>
-                        <TextBox Style="{StaticResource LoginTextBoxStyle}" Text="{Binding Exam3Value, UpdateSourceTrigger=PropertyChanged}"/>
-                    </StackPanel>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
-                    <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="{StaticResource ButtonBackground2Color}"
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,0">
+                        <Button Margin="0,0,5,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Назад" Background="{StaticResource ButtonBackground2Color}"
                             Command="{Binding MoveToEnrollePersonal}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
-                    <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Отправить"
+                        <Button Margin="5,0,0,0" HorizontalAlignment="Center" Width="150" Style="{StaticResource ButtonStyle}" Content="Отправить"
                             Command="{Binding Send}" 
                             CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Page}}}"/>
-                </StackPanel>
+                    </StackPanel>
 
+                </StackPanel>
             </StackPanel>
             <TextBlock Margin="0,20,0,0" Text="{Binding ErrorMessage}" Style="{StaticResource ErrorTextBlockStyle}" />
         </StackPanel>
