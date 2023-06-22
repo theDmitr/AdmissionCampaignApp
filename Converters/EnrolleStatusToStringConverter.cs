@@ -5,6 +5,9 @@ using System.Windows.Data;
 
 namespace AdmissionCampaign.Converters
 {
+    /// <summary>
+    /// Конвертер статуса поступления в строку
+    /// </summary>
     public class EnrolleStatusToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

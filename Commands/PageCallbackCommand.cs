@@ -4,6 +4,9 @@ using System.Windows.Controls;
 
 namespace AdmissionCampaign.Commands
 {
+    /// <summary>
+    /// Команда, вызывающая Callback-функцию, принимающую один параметр - Page
+    /// </summary>
     public class PageCallbackCommand : BaseCommand
     {
         private readonly Action<Page> execute;

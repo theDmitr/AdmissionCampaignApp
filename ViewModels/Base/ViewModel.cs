@@ -11,6 +11,9 @@ using System.Windows.Navigation;
 
 namespace AdmissionCampaign.ViewModels.Base
 {
+    /// <summary>
+    /// Базовый класс ViewModel
+    /// </summary>
     public class ViewModel : INotifyPropertyChanged
     {
         protected readonly DataContext dataContext = DataContext.Instance;
@@ -75,6 +78,11 @@ namespace AdmissionCampaign.ViewModels.Base
         #endregion
 
         #region GetUniversitySpecialityAndAdmissionCampaighs
+        /// <summary>
+        /// Метод для получения всех приемных кампаний ВУЗа в специальном объекте-контейнере
+        /// </summary>
+        /// <param name="universityID"></param>
+        /// <returns></returns>
         protected ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> GetUniversitySpecialityAndAdmissionCampaighs(int universityID)
         {
             ObservableCollection<UniversitySpecialityAndAdmissionCampaigh> result = new();
@@ -97,6 +105,12 @@ namespace AdmissionCampaign.ViewModels.Base
             return result;
         }
 
+        /// <summary>
+        /// Получение всех принятых заявок на конкретную приемную кампанию
+        /// </summary>
+        /// <param name="universityID"></param>
+        /// <param name="admissionCampaighID"></param>
+        /// <returns></returns>
         protected ObservableCollection<EnrolleAndPetition> GetEnrollesAndPetitions(int universityID, int admissionCampaighID)
         {
             ObservableCollection<EnrolleAndPetition> result = new();
@@ -134,6 +148,9 @@ namespace AdmissionCampaign.ViewModels.Base
         #endregion
     }
 
+    /// <summary>
+    /// Класс-контейнер для хранения путей к Представлениям (Views)
+    /// </summary>
     public class PageUriProvider
     {
         #region Admin
@@ -174,6 +191,11 @@ namespace AdmissionCampaign.ViewModels.Base
         public static Uri ChooseLogin { get; } = GetUri("ChooseLoginPage");
         #endregion
 
+        /// <summary>
+        /// Метод для получения пути к View (для избежания дублирующего кода)
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         private static Uri GetUri(string path)
         {
             return new($"../../Views/Pages/{path}.xaml", UriKind.RelativeOrAbsolute);

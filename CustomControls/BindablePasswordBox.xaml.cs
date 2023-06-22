@@ -13,7 +13,7 @@ namespace AdmissionCampaign.CustomControls
         public BindablePasswordBox()
         {
             InitializeComponent();
-            txtPassword.PasswordChanged += OnPasswordChanged;
+            txtPassword.PasswordChanged += OnPasswordChanged; // Привязка изменение поля к делегату-событию
         }
 
         private void OnPasswordChanged(object sender, RoutedEventArgs e)

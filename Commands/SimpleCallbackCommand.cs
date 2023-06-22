@@ -3,6 +3,9 @@ using System;
 
 namespace AdmissionCampaign.Commands
 {
+    /// <summary>
+    /// Команда, вызывающая Callback-функцию без параметров
+    /// </summary>
     public class SimpleCallbackCommand : BaseCommand
     {
         private readonly Action execute;

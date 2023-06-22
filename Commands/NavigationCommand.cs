@@ -5,6 +5,9 @@ using System.Windows.Controls;
 
 namespace AdmissionCampaign.Commands
 {
+    /// <summary>
+    /// Команда для перемещения по страницам
+    /// </summary>
     public class NavigationCommand : BaseCommand
     {
         private readonly Uri uri;

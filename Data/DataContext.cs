@@ -8,6 +8,9 @@ using System.Security;
 
 namespace AdmissionCampaign.Data
 {
+    /// <summary>
+    /// Класс, проводящий работу с ORM (EntityFramework)
+    /// </summary>
     public class DataContext : DbContext
     {
         #region Singleton
@@ -20,7 +23,7 @@ namespace AdmissionCampaign.Data
         #endregion
 
         #region DataBase
-        public int SessionUserID { get; set; } = -1;
+        public int SessionUserID { get; set; } = -1; // ID пользователя, находящегося в текущей сессии
 
         #region Tables
         public DbSet<User> Users { get; set; }
@@ -63,6 +66,9 @@ namespace AdmissionCampaign.Data
         public University GetUniversityFromSession => GetUserByID(SessionUserID).AcountType == User.AccountType.University
                 ? Universities.Where(u => u.UserID == SessionUserID).Single() : null;
 
+        /// <summary>
+        /// Получение Enrolle из текущей сессии
+        /// </summary>
         public Enrolle GetEnrolleFromSession => GetUserByID(SessionUserID).AcountType == User.AccountType.Enrolle
             ? Enrolles.Where(e => e.UserID == SessionUserID).Single() : null;
 
@@ -89,6 +95,11 @@ namespace AdmissionCampaign.Data
             .Where(ac => UniversitySpecialities.Where(us => us.ID == ac.UniversitySpecialityID).Single().UniversityID == universityID));
         }
 
+        /// <summary>
+        /// Получение всех заявок в конкретный ВУЗ
+        /// </summary>
+        /// <param name="universityID"></param>
+        /// <returns></returns>
         public ObservableCollection<Petition> GetUniversityPetitions(int universityID)
         {
             return new(Petitions
@@ -120,21 +131,42 @@ namespace AdmissionCampaign.Data
             return matches.Any() ? matches.Single() : null;
         }
 
+        /// <summary>
+        /// Получение специальности по ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public Speciality GetSpeciality(int ID)
         {
             return Specialities.Where(s => s.ID == ID).Single();
         }
 
+        /// <summary>
+        /// Получение специальности ВУЗа по ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public UniversitySpeciality GetUniversitySpeciality(int ID)
         {
             return UniversitySpecialities.Where(us => us.ID == ID).Single();
         }
 
+        /// <summary>
+        /// Получение специальности ВУЗа по специальности
+        /// </summary>
+        /// <param name="universityID"></param>
+        /// <param name="specialityID"></param>
+        /// <returns></returns>
         public UniversitySpeciality GetUniversitySpecialityBySpeciality(int universityID, int specialityID)
         {
             return UniversitySpecialities.Where(us => us.UniversityID == universityID && us.SpecialityID == specialityID).Single();
         }
 
+        /// <summary>
+        /// Получение предмета по ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public Exam GetExam(int ID)
         {
             return Exams.Where(e => e.ID == ID).Single();
@@ -405,12 +437,20 @@ namespace AdmissionCampaign.Data
             _ = SaveChanges();
         }
 
+        /// <summary>
+        /// Удаляет приемную кампанию
+        /// </summary>
+        /// <param name="ID"></param>
         public void RemoveUniversitySpecialityAdmissionCampaign(int ID)
         {
             _ = UniversitySpecialityAdmissionCampaigns.Where(ac => ac.ID == ID).ExecuteDelete();
             _ = SaveChanges();
         }
 
+        /// <summary>
+        /// Удаляет специальность ВУЗа
+        /// </summary>
+        /// <param name="ID"></param>
         public void RemoveUniversitySpeciality(int ID)
         {
             _ = UniversitySpecialities.Where(us => us.ID == ID).ExecuteDelete();

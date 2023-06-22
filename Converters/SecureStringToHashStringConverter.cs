@@ -6,6 +6,9 @@ using System.Text;
 
 namespace AdmissionCampaign.Converters
 {
+    /// <summary>
+    /// Конвертер SecureString в String и наоборот (используя хеширование)
+    /// </summary>
     public class SecureStringToHashStringConverter
     {
         public static string ConvertSecureStringToString(SecureString secureString)
