@@ -8,8 +8,14 @@ namespace AdmissionCampaign.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
+        [Required]
         public string Login { get; set; }
+
+        [Required]
         public string Password { get; set; }
+
+        [Required]
         public AccountType AcountType { get; set; }
 
         public User(string login, string password, AccountType acountType)
