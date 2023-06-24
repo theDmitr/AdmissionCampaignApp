@@ -73,7 +73,7 @@ namespace AdmissionCampaign.Data
             ? Enrolles.Where(e => e.UserID == SessionUserID).Single() : null;
 
         /// <summary>
-        /// Получание Specialities которые используется в UniversitySpecialities в конкретном University
+        /// Получение Specialities которые используется в UniversitySpecialities в конкретном University
         /// </summary>
         /// <param name="universityID"></param>
         /// <returns></returns>
